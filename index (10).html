@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hairstyle by Anwar — Meisterbetrieb · Coesfeld</title>
+<meta name="description" content="Meisterbetrieb und exklusiver NEWSHA Partnersalon in Coesfeld. Zwei Standorte, ein Anspruch: Coiffure auf höchstem Niveau." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:              #F2EDE2;
+    --bg-elevated:     #F8F4EA;
+    --bg-dark:         #12100E;
+    --ink:             #141211;
+    --ink-soft:        #3A332E;
+    --ink-muted:       #6B605A;
+    --line:            #D9D0C2;
+    --line-soft:       #E6DFD2;
+    --accent:          #A67C52;
+    --accent-light:    #D4B891;
+    --accent-deep:     #7A5A3B;
+
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-sans:    'Manrope', system-ui, -apple-system, sans-serif;
+
+    --ease: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--ink); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+
+  .italic { font-style: italic; font-variation-settings: "opsz" 144, "SOFT" 100; }
+
+  .eyebrow {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .eyebrow-line::before {
+    content: ""; display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--ink-muted);
+    vertical-align: middle;
+    margin-right: 14px;
+    transform: translateY(-1px);
+  }
+
+  p.body {
+    font-size: clamp(1rem, 1.05vw, 1.125rem);
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  /* —— NAVIGATION —— */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.1rem 0;
+    transition: all 0.4s var(--ease-smooth);
+    background: transparent;
+  }
+
+  .nav-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-logo {
+    height: 44px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: filter 0.4s var(--ease-smooth);
+  }
+
+  .nav.nav-solid {
+    background: rgba(242, 237, 226, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(217, 208, 194, 0.4);
+  }
+
+  .nav.nav-solid .nav-logo { filter: brightness(0); }
+  .nav.nav-solid .nav-link { color: var(--ink); }
+  .nav.nav-solid .nav-cta {
+    color: var(--ink); border-color: var(--ink);
+  }
+  .nav.nav-solid .nav-cta:hover {
+    background: var(--ink); color: var(--bg);
+  }
+  .nav.nav-solid .nav-mobile-toggle { color: var(--ink); }
+
+  .nav-center {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .nav-link {
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--bg);
+    position: relative; padding: 0.4rem 0;
+    transition: all 0.3s var(--ease);
+  }
+
+  .nav-link::after {
+    content: ""; position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 1px;
+    background: currentColor;
+    transform: scaleX(0); transform-origin: right;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1); transform-origin: left;
+  }
+
+  .nav-cta {
+    display: inline-flex; align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--bg);
+    padding: 0.65rem 1.2rem;
+    border: 1px solid var(--bg);
+    border-radius: 999px;
+    transition: all 0.3s var(--ease);
+  }
+
+  .nav-cta:hover { background: var(--bg); color: var(--bg-dark); }
+
+  .nav-mobile-toggle {
+    display: none;
+    width: 36px; height: 36px;
+    flex-direction: column;
+    justify-content: center; align-items: center;
+    gap: 5px;
+    color: var(--bg);
+  }
+  .nav-mobile-toggle span {
+    width: 22px; height: 1.5px;
+    background: currentColor;
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+  .nav-mobile-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-mobile-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-mobile-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  @media (max-width: 980px) {
+    .nav-inner { grid-template-columns: auto 1fr auto; }
+    .nav-center {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 16, 14, 0.98);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      justify-content: center; align-items: center;
+      gap: 1.25rem;
+      padding: 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.5s var(--ease-smooth);
+      z-index: -1;
+    }
+    .nav-center.open { transform: translateY(0); }
+    .nav-center .nav-link {
+      color: var(--bg) !important;
+      font-size: 1.5rem;
+      font-family: var(--font-display);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      text-transform: none;
+    }
+    .nav-mobile-toggle { display: flex; }
+    .nav-cta { display: none; }
+  }
+
+  /* —— PAGE ROUTING —— */
+  .page {
+    display: none;
+    min-height: 100vh;
+  }
+  .page.active {
+    display: block;
+    animation: pageIn 0.7s var(--ease);
+  }
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-header {
+    padding: 10rem 0 4rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-header-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+  }
+  .page-header h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+  .page-header h1 .italic { color: var(--accent); }
+  .page-header p {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    line-height: 1.45;
+    color: var(--ink-soft);
+    letter-spacing: -0.01em;
+    max-width: 40ch;
+    justify-self: end;
+  }
+  @media (max-width: 860px) {
+    .page-header-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .page-header p { justify-self: start; }
+    .page-header { padding: 8rem 0 3rem; }
+  }
+
+  /* —— HERO —— */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    background: var(--bg-dark);
+    color: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 7rem 0 4rem;
+  }
+
+  .hero-canvas { position: absolute; inset: 0; z-index: 1; }
+  .hero-canvas canvas { width: 100% !important; height: 100% !important; }
+
+  .hero-grain {
+    position: absolute; inset: 0; z-index: 2;
+    pointer-events: none;
+    opacity: 0.08; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.88 0 0 0 0 0.8 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .hero-content { position: relative; z-index: 3; width: 100%; }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(3.2rem, 10vw, 9.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    color: var(--bg);
+  }
+  .hero-headline .italic { color: var(--accent-light); }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 2rem;
+    border-top: 1px solid rgba(242,237,226,0.15);
+    padding-top: 1.5rem;
+    margin-top: 3rem;
+  }
+  .hero-meta-block { display: flex; flex-direction: column; gap: 0.25rem; }
+  .hero-meta .eyebrow { color: rgba(242,237,226,0.55); }
+  .hero-meta .value {
+    font-family: var(--font-display);
+    font-weight: 400; font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    color: var(--bg);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.6rem;
+    font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(242,237,226,0.6);
+  }
+  .hero-scroll-line {
+    width: 1px; height: 36px;
+    background: linear-gradient(to bottom, rgba(242,237,226,0.6), transparent);
+    animation: scrollLine 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(0.4); transform-origin: top; }
+    50% { transform: scaleY(1); }
+  }
+
+  .hero-pre { opacity: 0; }
+  .hero-loaded .hero-pre { animation: heroIn 1.4s var(--ease) forwards; }
+  .hero-loaded .hero-pre:nth-child(2) { animation-delay: 0.15s; }
+  .hero-loaded .hero-pre:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* —— ABOUT (Home) —— */
+  .about { padding: clamp(6rem, 12vh, 11rem) 0; background: var(--bg); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .about-label {
+    display: flex; flex-direction: column; gap: 0.8rem;
+    position: sticky; top: 5rem;
+  }
+  .about-label .number {
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 300;
+    font-size: 4rem; line-height: 1;
+    color: var(--accent);
+  }
+  .about-text h2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.2rem, 4.2vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 2.5rem;
+    color: var(--ink);
+  }
+  .about-text h2 .accent { color: var(--accent); font-style: italic; }
+  .about-text p + p { margin-top: 1.5rem; }
+  .about-signature {
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .signature-name {
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 400;
+    font-size: 1.8rem; color: var(--ink);
+  }
+  .signature-role {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  @media (max-width: 860px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-label { position: static; }
+  }
+
+  /* —— MARQUEE —— */
+  .marquee {
+    overflow: hidden; padding: 2.5rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-elevated);
+  }
+  .marquee-track {
+    display: flex; gap: 4rem; width: max-content;
+    animation: marqueeMove 40s linear infinite;
+  }
+  .marquee-item {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.6rem, 3.5vw, 3rem);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 4rem;
+    color: var(--ink);
+  }
+  .marquee-item span:last-child {
+    font-style: italic; color: var(--accent);
+    opacity: 0.7; font-size: 1.4rem;
+  }
+  @keyframes marqueeMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* —— QUOTE —— */
+  .quote-section {
+    padding: clamp(6rem, 15vh, 12rem) 0;
+    background: var(--bg-dark);
+    color: var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .quote-mark {
+    position: absolute; top: 3rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-style: italic; font-size: 14rem;
+    line-height: 1; color: var(--accent);
+    opacity: 0.18; pointer-events: none;
+  }
+  .quote-inner {
+    text-align: center; max-width: 900px;
+    margin: 0 auto; position: relative; z-index: 2;
+  }
+  .quote-inner blockquote {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.6rem, 3.4vw, 3rem);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin-bottom: 2.5rem;
+  }
+  .quote-inner blockquote .italic { color: var(--accent-light); }
+  .quote-attribution {
+    display: inline-flex; align-items: center; gap: 1rem;
+    font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(242,237,226,0.7);
+  }
+  .quote-attribution::before,
+  .quote-attribution::after {
+    content: ""; width: 30px; height: 1px;
+    background: var(--accent-light); display: inline-block;
+  }
+
+  /* —— HOME CTA —— */
+  .home-cta {
+    padding: clamp(6rem, 12vh, 10rem) 0;
+    background: var(--bg); text-align: center;
+  }
+  .home-cta h2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin: 1.5rem auto 2rem;
+    max-width: 16ch;
+  }
+  .home-cta h2 .italic { color: var(--accent); }
+  .home-cta p {
+    max-width: 42ch;
+    margin: 0 auto 2.5rem;
+    color: var(--ink-soft);
+  }
+
+  /* —— BUTTONS —— */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    padding: 1.05rem 2rem;
+    border-radius: 999px;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    transition: all 0.4s var(--ease);
+    font-family: var(--font-sans);
+  }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent-deep); transform: translateY(-2px); }
+  .btn-dark { background: var(--ink); color: var(--bg); }
+  .btn-dark:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn-lg { padding: 1.2rem 2.5rem; font-size: 0.82rem; }
+
+  /* —— PRICE LIST —— */
+  .prices { padding: 4rem 0 6rem; }
+  .prices-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    align-items: start;
+  }
+  .prices-intro .note {
+    padding: 1.75rem;
+    border: 1px solid var(--line);
+    background: var(--bg-elevated);
+    border-radius: 4px;
+  }
+  .prices-intro .note p {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .prices-intro .note p + p { margin-top: 0.75rem; }
+  .prices-intro .note strong { color: var(--ink); font-weight: 600; }
+
+  .price-category { margin-bottom: 5rem; }
+  .price-category-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 2rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .price-category-header h2 {
+    font-family: var(--font-display);
+    font-weight: 300; font-style: italic;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.02em; line-height: 1;
+    color: var(--ink);
+  }
+  .price-category-header .num {
+    font-family: var(--font-display);
+    font-style: italic; font-size: 1rem;
+    color: var(--accent);
+  }
+
+  .price-table {
+    display: grid;
+    grid-template-columns: 2.2fr repeat(3, 1fr);
+    column-gap: 1.5rem;
+  }
+  .price-table-head { display: contents; }
+  .price-table-head > div {
+    padding: 0.75rem 0;
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid var(--line);
+    text-align: right;
+  }
+  .price-table-head > div:first-child { text-align: left; }
+
+  .price-row { display: contents; }
+  .price-row > div {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line-soft);
+    transition: background 0.3s var(--ease);
+  }
+  .price-row:hover > div {
+    background: rgba(212, 184, 145, 0.08);
+  }
+  .price-row .service-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .price-row .price-val {
+    text-align: right;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .price-row .price-val.muted {
+    color: var(--ink-muted); opacity: 0.4;
+  }
+  .price-row .price-val.from {
+    color: var(--accent-deep);
+  }
+  .price-row .price-val.from::before {
+    content: "ab ";
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.85em;
+  }
+
+  .price-single {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: center;
+    transition: background 0.3s var(--ease);
+  }
+  .price-single:hover { background: rgba(212, 184, 145, 0.08); }
+  .price-single .service-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+    letter-spacing: -0.01em;
+  }
+  .price-single .price-val {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 720px) {
+    .prices-intro { grid-template-columns: 1fr; gap: 2rem; }
+    .price-table {
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      column-gap: 0.5rem;
+    }
+    .price-row .service-name, .price-single .service-name { font-size: 0.92rem; }
+    .price-row .price-val, .price-single .price-val { font-size: 0.85rem; }
+    .price-table-head > div { font-size: 0.58rem; letter-spacing: 0.15em; }
+  }
+
+  /* —— TEAM —— */
+  .team-section { padding: 4rem 0 6rem; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .team-member { display: flex; flex-direction: column; gap: 1rem; }
+  .member-portrait {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--bg-elevated), var(--line-soft));
+    border-radius: 4px;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.6s var(--ease);
+  }
+  .team-member:hover .member-portrait { transform: scale(0.985); }
+  .member-initial {
+    font-family: var(--font-display);
+    font-weight: 300; font-size: 6rem;
+    color: var(--accent); opacity: 0.4;
+    font-style: italic;
+  }
+  .member-portrait::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(212,184,145,0.25), transparent 60%);
+  }
+  .member-name {
+    font-family: var(--font-display);
+    font-weight: 400; font-size: 1.3rem;
+    letter-spacing: -0.01em; color: var(--ink);
+  }
+  .member-role {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted); margin-top: 0.15rem;
+  }
+  .member-years {
+    font-family: var(--font-display);
+    font-style: italic; font-size: 0.85rem;
+    color: var(--accent); margin-top: 0.3rem;
+  }
+  @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* —— PORTFOLIO / ARBEITEN —— */
+  .portfolio-section { padding: 4rem 0 6rem; }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(0.75rem, 1.2vw, 1.25rem);
+  }
+  .portfolio-item {
+    position: relative; overflow: hidden;
+    border-radius: 3px; background: var(--line-soft);
+    cursor: pointer;
+  }
+  .portfolio-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease), filter 0.6s var(--ease);
+    filter: saturate(0.95) contrast(1.02);
+  }
+  .portfolio-item:hover img {
+    transform: scale(1.04);
+    filter: saturate(1.05) contrast(1.05);
+  }
+  .portfolio-item::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(20,18,17,0.3), transparent 40%);
+    opacity: 0; transition: opacity 0.5s var(--ease);
+    pointer-events: none;
+  }
+  .portfolio-item:hover::after { opacity: 1; }
+  .portfolio-caption {
+    position: absolute; bottom: 1rem; left: 1.25rem;
+    color: var(--bg);
+    font-family: var(--font-display);
+    font-style: italic; font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    opacity: 0; transform: translateY(8px);
+    transition: all 0.5s var(--ease);
+    z-index: 2;
+  }
+  .portfolio-item:hover .portfolio-caption {
+    opacity: 1; transform: translateY(0);
+  }
+  .pf-1 { grid-column: span 7; aspect-ratio: 4/5; }
+  .pf-2 { grid-column: span 5; aspect-ratio: 4/5; }
+  .pf-3 { grid-column: span 4; aspect-ratio: 3/4; }
+  .pf-4 { grid-column: span 4; aspect-ratio: 3/4; }
+  .pf-5 { grid-column: span 4; aspect-ratio: 3/4; }
+  @media (max-width: 860px) {
+    .pf-1, .pf-2 { grid-column: span 12; aspect-ratio: 4/5; }
+    .pf-3, .pf-4, .pf-5 { grid-column: span 6; aspect-ratio: 3/4; }
+    .pf-5 { grid-column: 4 / span 6; }
+  }
+  @media (max-width: 540px) {
+    .pf-1, .pf-2, .pf-3, .pf-4, .pf-5 { grid-column: span 12; aspect-ratio: 4/5; }
+  }
+
+  /* —— SHOP —— */
+  .shop-section { padding: 4rem 0 6rem; }
+  .shop-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-deep); background: var(--bg-elevated);
+    margin-bottom: 1.5rem;
+  }
+  .shop-badge::before {
+    content: ""; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+  }
+
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 1.8vw, 1.75rem);
+  }
+  .shop-card {
+    background: var(--bg-elevated);
+    padding: 2rem 1.5rem 1.75rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    border-radius: 4px;
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line-soft);
+    transition: all 0.5s var(--ease);
+  }
+  .shop-card::before {
+    content: ""; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.6s var(--ease);
+  }
+  .shop-card:hover {
+    border-color: var(--accent-light);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -20px rgba(122, 90, 59, 0.25);
+  }
+  .shop-card:hover::before { transform: scaleX(1); }
+  .shop-card-image {
+    aspect-ratio: 1;
+    background: var(--bg);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.25rem;
+    position: relative; overflow: hidden;
+  }
+  .shop-card-image::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(212, 184, 145, 0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .shop-card-image img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.7s var(--ease);
+    filter: drop-shadow(0 10px 20px rgba(20, 18, 17, 0.08));
+  }
+  .shop-card:hover .shop-card-image img {
+    transform: scale(1.06) rotate(-1deg);
+  }
+  .shop-line {
+    font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .shop-card h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    min-height: 2.8em;
+  }
+  .shop-cta {
+    margin-top: auto;
+    display: inline-flex; align-items: center;
+    justify-content: space-between; gap: 0.5rem;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink);
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-soft);
+    transition: color 0.3s var(--ease);
+  }
+  .shop-cta .arrow { display: inline-block; transition: transform 0.4s var(--ease); }
+  .shop-card:hover .shop-cta { color: var(--accent-deep); }
+  .shop-card:hover .shop-cta .arrow { transform: translateX(4px); }
+  .shop-footer-cta {
+    margin-top: 4rem; text-align: center;
+    padding-top: 3rem; border-top: 1px solid var(--line);
+  }
+  .shop-footer-cta .eyebrow { display: block; margin-bottom: 1.25rem; }
+  @media (max-width: 1024px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .shop-grid { grid-template-columns: 1fr; } }
+
+  /* —— LOCATIONS —— */
+  .locations-section { padding: 4rem 0 6rem; }
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+  .location {
+    background: var(--bg-elevated);
+    padding: clamp(2rem, 3.5vw, 3.5rem);
+    border-radius: 4px;
+    display: flex; flex-direction: column; gap: 1.5rem;
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line);
+    transition: all 0.5s var(--ease);
+  }
+  .location::before {
+    content: ""; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--accent-light), var(--accent));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.7s var(--ease);
+  }
+  .location:hover::before { transform: scaleX(1); }
+  .location-num {
+    font-family: var(--font-display);
+    font-style: italic; font-size: 0.9rem;
+    color: var(--accent);
+  }
+  .location h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .location-address {
+    color: var(--ink-soft);
+    font-size: 1rem; line-height: 1.7;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .location-rows { display: flex; flex-direction: column; gap: 0.85rem; }
+  .location-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    align-items: baseline; gap: 1rem;
+  }
+  .location-row .label {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .location-row .value {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.02rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    transition: color 0.3s var(--ease);
+  }
+  .location-row a.value:hover { color: var(--accent-deep); }
+  .location-hours {
+    margin-top: 0.75rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 860px) { .locations-grid { grid-template-columns: 1fr; } }
+
+  /* —— BOOKING —— */
+  .booking { padding: 4rem 0 6rem; }
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .booking-sidebar {
+    position: sticky; top: 6rem;
+    padding: 2rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .booking-sidebar h3 {
+    font-family: var(--font-display);
+    font-weight: 400; font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .booking-steps { display: flex; flex-direction: column; gap: 1rem; }
+  .booking-step {
+    display: flex; gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .booking-step:last-child { border-bottom: none; }
+  .booking-step .num {
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 300;
+    font-size: 1.1rem; color: var(--accent);
+    min-width: 20px;
+  }
+  .booking-step .text {
+    font-size: 0.92rem; color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .booking-step strong { color: var(--ink); font-weight: 600; }
+
+  .booking-contact-alt {
+    margin-top: 2rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .booking-contact-alt .label {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.75rem;
+  }
+  .booking-contact-alt a {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 400; font-size: 1rem;
+    padding: 0.3rem 0;
+    color: var(--ink);
+    transition: color 0.3s var(--ease);
+  }
+  .booking-contact-alt a:hover { color: var(--accent-deep); }
+
+  .booking-form {
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    gap: 2rem;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 0.6rem; }
+  .form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .form-label {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .form-label .required { color: var(--accent); }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 1rem;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    transition: all 0.3s var(--ease);
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--bg);
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.1);
+  }
+  .form-textarea { min-height: 100px; resize: vertical; }
+
+  .form-radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .form-radio { position: relative; cursor: pointer; }
+  .form-radio input {
+    position: absolute; opacity: 0; pointer-events: none;
+  }
+  .form-radio-label {
+    display: block;
+    padding: 1rem 1.25rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: all 0.3s var(--ease);
+    text-align: center;
+  }
+  .form-radio-label strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 400; font-size: 1rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.15rem;
+  }
+  .form-radio-label span {
+    font-size: 0.75rem; color: var(--ink-muted);
+  }
+  .form-radio input:checked + .form-radio-label {
+    background: var(--ink); color: var(--bg);
+    border-color: var(--ink);
+  }
+  .form-radio input:checked + .form-radio-label span {
+    color: rgba(242,237,226,0.7);
+  }
+  .form-radio-label:hover { border-color: var(--accent); }
+
+  .form-actions {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .form-actions .btn { flex: 1; min-width: 200px; justify-content: center; }
+
+  .form-note {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .booking-confirmation {
+    display: none;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent-light);
+    border-radius: 4px;
+    animation: pageIn 0.6s var(--ease);
+  }
+  .booking-confirmation.show { display: block; }
+  .booking-confirmation .check {
+    width: 60px; height: 60px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bg); font-size: 1.8rem;
+  }
+  .booking-confirmation h3 {
+    font-family: var(--font-display);
+    font-weight: 300; font-size: 1.8rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .booking-confirmation p {
+    color: var(--ink-soft);
+    max-width: 40ch; margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 980px) {
+    .booking-grid { grid-template-columns: 1fr; }
+    .booking-sidebar { position: static; }
+    .form-group-row { grid-template-columns: 1fr; gap: 1rem; }
+  }
+
+  /* —— FOOTER —— */
+  footer {
+    background: var(--bg-dark);
+    color: rgba(242,237,226,0.6);
+    padding: 4rem 0 2rem;
+    border-top: 1px solid rgba(242,237,226,0.08);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(242,237,226,0.08);
+  }
+  .footer-logo {
+    height: 38px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    margin-bottom: 1rem;
+  }
+  .footer-tagline {
+    font-size: 0.9rem; line-height: 1.6;
+    max-width: 32ch;
+    color: rgba(242,237,226,0.55);
+  }
+  .footer-col h4 {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 1.25rem;
+  }
+  .footer-col a, .footer-col p {
+    display: block;
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+    color: rgba(242,237,226,0.7);
+    transition: color 0.3s var(--ease);
+  }
+  .footer-col a:hover { color: var(--accent-light); }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(242,237,226,0.35);
+  }
+  .footer-bottom a { margin-left: 1.5rem; transition: color 0.3s var(--ease); }
+  .footer-bottom a:hover { color: var(--accent-light); }
+
+  .footer-social {
+    display: flex; gap: 0.6rem; margin-top: 1rem;
+  }
+  .footer-social a {
+    width: 34px; height: 34px;
+    border: 1px solid rgba(242,237,226,0.15);
+    border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+    transition: all 0.3s var(--ease);
+  }
+  .footer-social a:hover {
+    background: var(--accent); border-color: var(--accent);
+    color: var(--bg);
+  }
+  @media (max-width: 860px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+  @media (max-width: 540px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  /* —— CHATBOT —— */
+  .chatbot-toggle {
+    position: fixed;
+    bottom: 1.5rem; right: 1.5rem;
+    z-index: 90;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px -5px rgba(20, 18, 17, 0.4);
+    transition: all 0.4s var(--ease);
+    border: 1.5px solid var(--accent);
+  }
+  .chatbot-toggle:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+  }
+  .chatbot-toggle svg {
+    width: 24px; height: 24px;
+    transition: transform 0.3s var(--ease);
+  }
+  .chatbot-toggle.open svg { transform: rotate(180deg); }
+  .chatbot-pulse {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    animation: chatPulse 2s ease-out infinite;
+  }
+  @keyframes chatPulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+  .chatbot-toggle.open .chatbot-pulse { display: none; }
+
+  .chatbot-panel {
+    position: fixed;
+    bottom: 5.5rem; right: 1.5rem;
+    z-index: 89;
+    width: 380px;
+    max-width: calc(100vw - 2rem);
+    height: 560px;
+    max-height: calc(100vh - 8rem);
+    background: var(--bg);
+    border-radius: 16px;
+    box-shadow: 0 25px 60px -10px rgba(20, 18, 17, 0.35);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0; pointer-events: none;
+    transition: all 0.35s var(--ease-smooth);
+    border: 1px solid var(--line);
+  }
+  .chatbot-panel.open {
+    transform: translateY(0) scale(1);
+    opacity: 1; pointer-events: auto;
+  }
+
+  .chatbot-header {
+    padding: 1.25rem 1.5rem;
+    background: var(--ink);
+    color: var(--bg);
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .chatbot-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 400; font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .chatbot-avatar::after {
+    content: "";
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 10px; height: 10px;
+    background: #5FBF6E;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+  }
+  .chatbot-title {
+    font-family: var(--font-display);
+    font-weight: 400; font-size: 1rem;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .chatbot-subtitle {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(242,237,226,0.55);
+    margin-top: 0.15rem;
+  }
+
+  .chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    background: var(--bg);
+    scroll-behavior: smooth;
+  }
+  .chatbot-messages::-webkit-scrollbar { width: 6px; }
+  .chatbot-messages::-webkit-scrollbar-track { background: transparent; }
+  .chatbot-messages::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+  .chat-message {
+    display: flex; flex-direction: column; gap: 0.25rem;
+    max-width: 88%;
+    animation: msgIn 0.4s var(--ease);
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .chat-message.bot { align-self: flex-start; }
+  .chat-message.user { align-self: flex-end; }
+
+  .chat-bubble {
+    padding: 0.85rem 1.1rem;
+    border-radius: 16px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .chat-message.bot .chat-bubble {
+    background: var(--bg-elevated);
+    color: var(--ink);
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--line-soft);
+  }
+  .chat-message.user .chat-bubble {
+    background: var(--ink);
+    color: var(--bg);
+    border-bottom-right-radius: 4px;
+  }
+  .chat-bubble a {
+    color: var(--accent-deep);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .chat-message.user .chat-bubble a { color: var(--accent-light); }
+
+  .chat-typing {
+    display: flex; gap: 4px;
+    padding: 1rem 1.1rem;
+    background: var(--bg-elevated);
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--line-soft);
+    width: fit-content;
+  }
+  .chat-typing span {
+    width: 6px; height: 6px;
+    background: var(--ink-muted);
+    border-radius: 50%;
+    animation: typing 1.3s infinite;
+  }
+  .chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typing {
+    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-4px); }
+  }
+
+  .chat-suggestions {
+    padding: 0.75rem 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    border-top: 1px solid var(--line-soft);
+    background: var(--bg);
+  }
+  .chat-chip {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.85rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    transition: all 0.25s var(--ease);
+    font-family: var(--font-sans);
+  }
+  .chat-chip:hover {
+    background: var(--accent); color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .chatbot-input {
+    display: flex; gap: 0.5rem;
+    padding: 0.85rem 1rem 1rem;
+    border-top: 1px solid var(--line);
+    background: var(--bg-elevated);
+  }
+  .chatbot-input input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.92rem;
+    transition: all 0.3s var(--ease);
+  }
+  .chatbot-input input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.1);
+  }
+  .chatbot-input button {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s var(--ease);
+    flex-shrink: 0;
+  }
+  .chatbot-input button:hover { background: var(--accent); }
+
+  @media (max-width: 540px) {
+    .chatbot-panel {
+      right: 0.75rem; left: 0.75rem;
+      bottom: 5rem; width: auto;
+      max-width: none;
+      height: min(560px, calc(100vh - 7rem));
+    }
+    .chatbot-toggle { bottom: 1rem; right: 1rem; }
+  }
+
+  /* —— REVEALS —— */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: all 1.1s var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-stagger > * {
+    opacity: 0; transform: translateY(30px);
+    transition: all 0.9s var(--ease);
+  }
+  .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
+  .reveal-stagger.in > *:nth-child(1) { transition-delay: 0ms; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 80ms; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 160ms; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms; }
+  .reveal-stagger.in > *:nth-child(5) { transition-delay: 320ms; }
+  .reveal-stagger.in > *:nth-child(6) { transition-delay: 400ms; }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#/" data-route="/" aria-label="Hairstyle by Anwar — Startseite">
+      <img class="nav-logo" src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/08/26476_Hairstyle_by_Anwar_Logo_V06.png" alt="Hairstyle by Anwar" />
+    </a>
+    <div class="nav-center" id="nav-center">
+      <a href="#/leistungen" data-route="/leistungen" class="nav-link">Leistungen</a>
+      <a href="#/arbeiten" data-route="/arbeiten" class="nav-link">Arbeiten</a>
+      <a href="#/team" data-route="/team" class="nav-link">Team</a>
+      <a href="#/shop" data-route="/shop" class="nav-link">Shop</a>
+      <a href="#/standorte" data-route="/standorte" class="nav-link">Standorte</a>
+    </div>
+    <a href="#/termin" data-route="/termin" class="nav-cta">Termin</a>
+    <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="app">
+
+<!-- ════════════════ HOME ════════════════ -->
+<div class="page active" data-route="/">
+
+<section class="hero">
+  <div class="hero-canvas" id="three-canvas"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content container">
+    <div>
+      <div class="hero-pre" style="margin-bottom: 2.5rem;">
+        <span class="eyebrow eyebrow-line" style="color: rgba(242,237,226,0.65);">Meisterbetrieb · Coesfeld</span>
+      </div>
+      <h1 class="hero-headline hero-pre">
+        Coiffure,<br/>
+        die <span class="italic">bleibt.</span>
+      </h1>
+    </div>
+    <div class="hero-meta hero-pre">
+      <div class="hero-meta-block">
+        <span class="eyebrow">01 — Standort</span>
+        <span class="value">Süringstraße 4</span>
+      </div>
+      <div class="hero-meta-block">
+        <span class="eyebrow">02 — Standort</span>
+        <span class="value">Kleine Viehstraße 13</span>
+      </div>
+      <div class="hero-meta-block">
+        <span class="eyebrow">Partnerschaft</span>
+        <span class="value italic" style="font-style: italic;">Newsha Exclusive</span>
+      </div>
+      <div class="hero-meta-block">
+        <span class="eyebrow">Auszeichnung</span>
+        <span class="value">Meisterbetrieb</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-label reveal">
+        <span class="eyebrow eyebrow-line">Der Salon</span>
+        <span class="number italic">01</span>
+      </div>
+      <div class="about-text reveal">
+        <h2>Zwei Adressen.<br/>Ein <span class="accent italic">Anspruch.</span></h2>
+        <p class="body">
+          Willkommen bei <strong>Hairstyle by Anwar</strong> — Ihrem Friseur­handwerk in Coesfeld. Unter der Führung von Anwar, dem kreativen Kopf hinter beiden Salons, verbinden wir klassisches Handwerk mit der Gelassenheit eines Ortes, an dem man wirklich ankommen kann.
+        </p>
+        <p class="body">
+          Unser Team vereint über vierzig Jahre Berufserfahrung mit jungen, ausgezeichnet ausgebildeten Stylistinnen. Vom Schnitt über sanfte Colorationen bis zu moderner Strähnentechnik: Wir arbeiten präzise, ehrlich und immer im Dialog mit Ihnen.
+        </p>
+        <p class="body">
+          Als <strong>Meisterbetrieb</strong> und exklusiver <strong>NEWSHA Partnersalon</strong> setzen wir auf Produkte, die halten, was ihre Herkunft verspricht — und auf einen Service, der weit über den reinen Termin hinausgeht.
+        </p>
+        <div class="about-signature">
+          <div>
+            <div class="signature-name italic">Anwar</div>
+            <div class="signature-role">Inhaber · Meister</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="eyebrow" style="margin-bottom: 0.3rem;">Bewertungen</div>
+            <div style="font-family: var(--font-display); font-size: 1.6rem; color: var(--ink);">
+              4,8 <span style="color: var(--accent); font-style: italic; font-size: 1rem;">aus 188+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item"><span>Präzisionsschnitt</span><span>◦</span></span>
+    <span class="marquee-item"><span>Balayage</span><span>◦</span></span>
+    <span class="marquee-item"><span>Brautstyling</span><span>◦</span></span>
+    <span class="marquee-item"><span>Coloration</span><span>◦</span></span>
+    <span class="marquee-item"><span>Strähnentechnik</span><span>◦</span></span>
+    <span class="marquee-item"><span>Herrenhaar</span><span>◦</span></span>
+    <span class="marquee-item"><span>Newsha Pflege</span><span>◦</span></span>
+    <span class="marquee-item"><span>Präzisionsschnitt</span><span>◦</span></span>
+    <span class="marquee-item"><span>Balayage</span><span>◦</span></span>
+    <span class="marquee-item"><span>Brautstyling</span><span>◦</span></span>
+    <span class="marquee-item"><span>Coloration</span><span>◦</span></span>
+    <span class="marquee-item"><span>Strähnentechnik</span><span>◦</span></span>
+    <span class="marquee-item"><span>Herrenhaar</span><span>◦</span></span>
+    <span class="marquee-item"><span>Newsha Pflege</span><span>◦</span></span>
+  </div>
+</div>
+
+<section class="quote-section">
+  <div class="quote-mark">"</div>
+  <div class="container quote-inner reveal">
+    <blockquote>
+      „Der beste Haircut, den ich in fast fünf Jahren in Deutschland hatte. <span class="italic">Ehrlich.</span>"
+    </blockquote>
+    <div class="quote-attribution">Google Review · Coesfeld</div>
+  </div>
+</section>
+
+<section class="home-cta">
+  <div class="container reveal">
+    <span class="eyebrow eyebrow-line">Bereit?</span>
+    <h2>Ein Termin ist<br/>einen <span class="italic">Klick entfernt.</span></h2>
+    <p class="body">
+      Buchen Sie online, rufen Sie uns an oder schreiben Sie uns eine WhatsApp. Wir freuen uns auf Ihren Besuch.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="#/termin" data-route="/termin" class="btn btn-dark btn-lg">Termin buchen →</a>
+      <a href="#/leistungen" data-route="/leistungen" class="btn btn-ghost btn-lg">Preisliste ansehen</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ════════════════ LEISTUNGEN ════════════════ -->
+<div class="page" data-route="/leistungen">
+
+<section class="page-header">
+  <div class="container">
+    <div class="page-header-inner">
+      <div>
+        <span class="eyebrow eyebrow-line" style="margin-bottom: 1.5rem; display: inline-block;">Preisliste</span>
+        <h1>Leistungen<br/>&amp; <span class="italic">Preise.</span></h1>
+      </div>
+      <p>
+        Transparent. Ehrlich. Unsere aktuelle Preisliste — mit allen Leistungen für Damen, Herren und Kinder in beiden Salons.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="prices">
+  <div class="container">
+    <div class="prices-intro">
+      <p class="body">
+        Jede Behandlung beginnt mit einer kostenlosen, ehrlichen Beratung. Viele unserer Leistungen werden individuell auf Haartyp, Länge und Zustand abgestimmt — den endgültigen Preis besprechen wir deshalb gemeinsam im Salon, bevor wir beginnen.
+      </p>
+      <div class="note">
+        <p><strong>„ab"-Preise.</strong> Der angegebene Preis ist der Startpreis. Je nach Haardichte, Länge und gewünschter Technik kann sich der finale Preis erhöhen — transparent vor Behandlungsbeginn.</p>
+        <p><strong>Neuhaarschnitt.</strong> Zusätzlich zu Farbbehandlungen berechnen wir für einen neuen Haarschnitt pauschal 12,00 €.</p>
+      </div>
+    </div>
+
+    <!-- DAMEN -->
+    <div class="price-category reveal">
+      <div class="price-category-header">
+        <span class="num italic">— 01</span>
+        <h2>Damen</h2>
+      </div>
+      <div class="price-table">
+        <div class="price-table-head">
+          <div>Leistung</div><div>Kurz</div><div>Mittel</div><div>Lang</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Damenhaarschnitt</div>
+          <div class="price-val from">32,50 €</div>
+          <div class="price-val">34,50 €</div>
+          <div class="price-val">39,50 €</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Waschen und Föhnen</div>
+          <div class="price-val from">22,50 €</div>
+          <div class="price-val">23,50 €</div>
+          <div class="price-val">25,50 €</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Waschen und Legen</div>
+          <div class="price-val from">23,50 €</div>
+          <div class="price-val">25,50 €</div>
+          <div class="price-val">29,50 €</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Dauerwelle</div>
+          <div class="price-val from">84,00 €</div>
+          <div class="price-val">94,00 €</div>
+          <div class="price-val">104,00 €</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Färben</div>
+          <div class="price-val from">52,00 €</div>
+          <div class="price-val">62,00 €</div>
+          <div class="price-val">76,00 €</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Ansatzfärben / Tönen</div>
+          <div class="price-val from">42,00 €</div>
+          <div class="price-val muted">—</div>
+          <div class="price-val muted">—</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Foliensträhnen</div>
+          <div class="price-val from">64,00 €</div>
+          <div class="price-val">74,00 €</div>
+          <div class="price-val">84,00 €</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Ansatz-Foliensträhnen</div>
+          <div class="price-val from">64,00 €</div>
+          <div class="price-val muted">—</div>
+          <div class="price-val muted">—</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Haubensträhnen</div>
+          <div class="price-val from">52,00 €</div>
+          <div class="price-val muted">—</div>
+          <div class="price-val muted">—</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Oberkopf-Foliensträhnen</div>
+          <div class="price-val from">46,00 €</div>
+          <div class="price-val">51,00 €</div>
+          <div class="price-val">56,00 €</div>
+        </div>
+        <div class="price-single">
+          <div class="service-name">Augenbrauen färben</div>
+          <div class="price-val">10,00 €</div>
+        </div>
+        <div class="price-single">
+          <div class="service-name">Wimpern färben</div>
+          <div class="price-val">10,00 €</div>
+        </div>
+        <div class="price-single">
+          <div class="service-name">Zupfen · Fadentechnik</div>
+          <div class="price-val">10,00 €</div>
+        </div>
+        <div class="price-single">
+          <div class="service-name">Neuhaarschnitt (Zusatz zu Farbe)</div>
+          <div class="price-val">zzgl. 12,00 €</div>
+        </div>
+        <div class="price-row">
+          <div class="service-name">Mädchen · 10–16 Jahre</div>
+          <div class="price-val from">19,00 €</div>
+          <div class="price-val">24,00 €</div>
+          <div class="price-val">29,00 €</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERREN -->
+    <div class="price-category reveal">
+      <div class="price-category-header">
+        <span class="num italic">— 02</span>
+        <h2>Herren</h2>
+      </div>
+      <div class="price-table">
+        <div class="price-single"><div class="service-name">Herrenhaarschnitt</div><div class="price-val">22,00 €</div></div>
+        <div class="price-single"><div class="service-name">Herren-Haarschnitt &amp; Rasur</div><div class="price-val">33,00 €</div></div>
+        <div class="price-single"><div class="service-name">Muster</div><div class="price-val">8,00 €</div></div>
+        <div class="price-single"><div class="service-name">Nassrasur</div><div class="price-val">13,00 €</div></div>
+        <div class="price-single"><div class="service-name">Modellrasur</div><div class="price-val">13,00 €</div></div>
+        <div class="price-single"><div class="service-name">Zupfen · Fadentechnik</div><div class="price-val">10,00 €</div></div>
+        <div class="price-single"><div class="service-name">Maschinenhaarschnitt</div><div class="price-val">16,00 €</div></div>
+      </div>
+    </div>
+
+    <!-- KINDER -->
+    <div class="price-category reveal">
+      <div class="price-category-header">
+        <span class="num italic">— 03</span>
+        <h2>Kinder</h2>
+      </div>
+      <div class="price-table">
+        <div class="price-single"><div class="service-name">Kinderhaarschnitt bis 9 Jahre</div><div class="price-val">12,00 €</div></div>
+        <div class="price-single"><div class="service-name">Jugendliche · 10–12 Jahre</div><div class="price-val">17,00 €</div></div>
+        <div class="price-single"><div class="service-name">Kinder mit „Null"-Schnitt</div><div class="price-val">19,00 €</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--line); text-align: center;" class="reveal">
+      <p class="body" style="margin: 0 auto 2rem;">
+        Sie haben Fragen zu einer Leistung oder wünschen eine Einschätzung zum Preis?<br/>
+        Nutzen Sie gerne unseren Chat — oder buchen Sie direkt eine unverbindliche Beratung.
+      </p>
+      <a href="#/termin" data-route="/termin" class="btn btn-dark btn-lg">Termin anfragen →</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ════════════════ ARBEITEN ════════════════ -->
+<div class="page" data-route="/arbeiten">
+
+<section class="page-header">
+  <div class="container">
+    <div class="page-header-inner">
+      <div>
+        <span class="eyebrow eyebrow-line" style="margin-bottom: 1.5rem; display: inline-block;">Arbeiten</span>
+        <h1>Was <span class="italic">entsteht,</span><br/>wenn Zeit da ist.</h1>
+      </div>
+      <p>
+        Ein Ausschnitt aus dem Alltag — echte Arbeit an echtem Haar, fotografiert in unseren beiden Salons in Coesfeld.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio-section">
+  <div class="container">
+    <div class="portfolio-grid reveal-stagger">
+      <a class="portfolio-item pf-1" href="https://www.instagram.com/hairstyle.by.anwar/" target="_blank" rel="noopener">
+        <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/08/WhatsApp-Image-2024-06-28-at-20.39.30-3.jpeg" alt="Coloration im Salon" loading="lazy" />
+        <span class="portfolio-caption">Coloration · Coesfeld</span>
+      </a>
+      <a class="portfolio-item pf-2" href="https://www.instagram.com/hairstyle.by.anwar/" target="_blank" rel="noopener">
+        <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/08/WhatsApp-Image-2024-06-28-at-20.37.16-5.jpeg" alt="Styling im Salon" loading="lazy" />
+        <span class="portfolio-caption">Styling · Süringstraße</span>
+      </a>
+      <a class="portfolio-item pf-3" href="https://www.instagram.com/hairstyle.by.anwar/" target="_blank" rel="noopener">
+        <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/08/WhatsApp-Image-2024-06-28-at-20.37.16-6.jpeg" alt="Präzisionsschnitt" loading="lazy" />
+        <span class="portfolio-caption">Präzisionsschnitt</span>
+      </a>
+      <a class="portfolio-item pf-4" href="https://www.instagram.com/hairstyle.by.anwar/" target="_blank" rel="noopener">
+        <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/08/WhatsApp-Image-2024-06-28-at-20.39.30-2.jpeg" alt="Strähnentechnik" loading="lazy" />
+        <span class="portfolio-caption">Strähnen · Balayage</span>
+      </a>
+      <a class="portfolio-item pf-5" href="https://www.instagram.com/hairstyle.by.anwar/" target="_blank" rel="noopener">
+        <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/08/WhatsApp-Image-2024-06-28-at-20.37.18-3.jpeg" alt="Finish &amp; Pflege" loading="lazy" />
+        <span class="portfolio-caption">Finish &amp; Pflege</span>
+      </a>
+    </div>
+    <div style="text-align: center; margin-top: 4rem;" class="reveal">
+      <a href="https://www.instagram.com/hairstyle.by.anwar/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--font-display); font-style: italic; font-size: 1.05rem; color: var(--accent-deep); border-bottom: 1px solid var(--accent-light); padding-bottom: 0.5rem;">
+        Mehr auf Instagram ansehen →
+      </a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ════════════════ TEAM ════════════════ -->
+<div class="page" data-route="/team">
+
+<section class="page-header">
+  <div class="container">
+    <div class="page-header-inner">
+      <div>
+        <span class="eyebrow eyebrow-line" style="margin-bottom: 1.5rem; display: inline-block;">Das Team</span>
+        <h1>Menschen,<br/>die unser <span class="italic">Handwerk tragen.</span></h1>
+      </div>
+      <p>
+        Unsere Erfahrung reicht von aufstrebenden Talenten bis zu Expertinnen mit über vier Jahrzehnten Berufspraxis. Jede Hand in unserem Salon hat ihre eigene Handschrift.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="team-grid reveal-stagger">
+      <div class="team-member">
+        <div class="member-portrait"><span class="member-initial">A</span></div>
+        <div>
+          <div class="member-name">Anwar</div>
+          <div class="member-role">Inhaber · Meister</div>
+          <div class="member-years italic">Kreativer Kopf beider Salons</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-portrait"><span class="member-initial">N</span></div>
+        <div>
+          <div class="member-name">Nicole</div>
+          <div class="member-role">Senior Stylistin</div>
+          <div class="member-years italic">33 Jahre Erfahrung</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-portrait"><span class="member-initial">V</span></div>
+        <div>
+          <div class="member-name">Viktoria</div>
+          <div class="member-role">Senior Stylistin</div>
+          <div class="member-years italic">24 Jahre Erfahrung</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-portrait"><span class="member-initial">K</span></div>
+        <div>
+          <div class="member-name">Kateryna</div>
+          <div class="member-role">Stylistin</div>
+          <div class="member-years italic">Präzise. Kreativ. Zugewandt.</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 5rem; padding-top: 4rem; border-top: 1px solid var(--line); max-width: 680px; margin-left: auto; margin-right: auto; text-align: center;" class="reveal">
+      <span class="eyebrow eyebrow-line" style="margin-bottom: 1.5rem; display: inline-block;">Meisterbetrieb</span>
+      <h3 style="font-family: var(--font-display); font-weight: 300; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem;">
+        Vom Meistergrad bis zur erstklassigen Ausbildung — <span class="italic" style="color: var(--accent);">eine Mischung aus Wissen und Kreativität.</span>
+      </h3>
+      <p class="body" style="margin: 0 auto;">
+        Als Meisterbetrieb verpflichten wir uns zu laufenden Weiterbildungen und höchsten Qualitätsstandards. Als exklusiver Newsha Partnersalon arbeiten wir ausschließlich mit Produkten, deren Wirkung wir täglich in unseren Händen erleben.
+      </p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ════════════════ SHOP ════════════════ -->
+<div class="page" data-route="/shop">
+
+<section class="page-header">
+  <div class="container">
+    <div class="page-header-inner">
+      <div>
+        <span class="shop-badge" style="margin-bottom: 1.5rem;">Newsha Exclusive Partnersalon</span>
+        <h1>Pflege direkt<br/>aus dem <span class="italic">Salon.</span></h1>
+      </div>
+      <p>
+        Als offizieller Newsha Partnersalon empfehlen wir Produkte, deren Wirkung wir täglich erleben. Bestellbar direkt über unsere Newsha-Partnerseite.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="shop-section">
+  <div class="container">
+    <div class="shop-grid reveal-stagger">
+
+      <a href="https://www.newsha.de/shoppartner/26064/newsha-classic-color-protect-shampoo.html" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-card-image">
+          <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/11/c_CPS_250ml-scaled.jpg" alt="Newsha Color Protect Shampoo" loading="lazy" />
+        </div>
+        <div>
+          <span class="shop-line">Newsha · Classic</span>
+          <h3>Color Protect Shampoo</h3>
+        </div>
+        <span class="shop-cta"><span>Jetzt entdecken</span><span class="arrow">→</span></span>
+      </a>
+
+      <a href="https://www.newsha.de/shoppartner/26064/newsha-pure-gentle-care-shampoo.html" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-card-image">
+          <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/11/p_GCS_250ml.png" alt="Newsha Gentle Care Shampoo" loading="lazy" />
+        </div>
+        <div>
+          <span class="shop-line">Newsha · Pure</span>
+          <h3>Gentle Care Shampoo</h3>
+        </div>
+        <span class="shop-cta"><span>Jetzt entdecken</span><span class="arrow">→</span></span>
+      </a>
+
+      <a href="https://www.newsha.de/shoppartner/26064/newsha-classic-high-performance-leave-in-conditioner.html" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-card-image">
+          <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/11/c_HPLC_250ml-scaled.jpg" alt="Newsha Leave-In Conditioner" loading="lazy" />
+        </div>
+        <div>
+          <span class="shop-line">Newsha · Classic</span>
+          <h3>High Performance Leave-In Conditioner</h3>
+        </div>
+        <span class="shop-cta"><span>Jetzt entdecken</span><span class="arrow">→</span></span>
+      </a>
+
+      <a href="https://www.newsha.de/shoppartner/26064/newsha-classic-deep-treatment-masque.html" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-card-image">
+          <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/11/c_DTM_150ml-scaled.jpg" alt="Newsha Deep Treatment Masque" loading="lazy" />
+        </div>
+        <div>
+          <span class="shop-line">Newsha · Classic</span>
+          <h3>Deep Treatment Masque</h3>
+        </div>
+        <span class="shop-cta"><span>Jetzt entdecken</span><span class="arrow">→</span></span>
+      </a>
+
+      <a href="https://www.newsha.de/shoppartner/26064/newsha-classic-all-about-smooth-treatment.html" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-card-image">
+          <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/11/c_AAST_150ml-scaled.jpg" alt="Newsha All About Smooth Treatment" loading="lazy" />
+        </div>
+        <div>
+          <span class="shop-line">Newsha · Classic</span>
+          <h3>All About Smooth Treatment</h3>
+        </div>
+        <span class="shop-cta"><span>Jetzt entdecken</span><span class="arrow">→</span></span>
+      </a>
+
+      <a href="https://www.newsha.de/shoppartner/26064/newsha-pure-soft-cotton-conditioner.html" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-card-image">
+          <img src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/11/p_SCC_150ml.png" alt="Newsha Soft Cotton Conditioner" loading="lazy" />
+        </div>
+        <div>
+          <span class="shop-line">Newsha · Pure</span>
+          <h3>Soft Cotton Conditioner</h3>
+        </div>
+        <span class="shop-cta"><span>Jetzt entdecken</span><span class="arrow">→</span></span>
+      </a>
+
+    </div>
+
+    <div class="shop-footer-cta reveal">
+      <span class="eyebrow">Gesamtes Sortiment</span>
+      <a href="https://www.newsha.de/shoppartner/26064" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="margin-top: 0.5rem;">
+        Alle Newsha Favorites shoppen →
+      </a>
+      <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--ink-muted); max-width: 48ch; margin-left: auto; margin-right: auto;">
+        Ihre Bestellung läuft über unsere offizielle Newsha-Partnerseite — bequem nach Hause geliefert, mit ausgewählter Beratung bei uns im Salon.
+      </p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ════════════════ STANDORTE ════════════════ -->
+<div class="page" data-route="/standorte">
+
+<section class="page-header">
+  <div class="container">
+    <div class="page-header-inner">
+      <div>
+        <span class="eyebrow eyebrow-line" style="margin-bottom: 1.5rem; display: inline-block;">Standorte</span>
+        <h1>Zwei Salons.<br/>Eine <span class="italic">Adresse:</span> Coesfeld.</h1>
+      </div>
+      <p>
+        Sie finden uns mitten in Coesfeld — nur wenige Minuten voneinander entfernt. Beide Salons mit gleichen Öffnungszeiten und gleichem Anspruch.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="locations-section">
+  <div class="container">
+    <div class="locations-grid reveal-stagger">
+      <div class="location">
+        <span class="location-num italic">— Filiale 01</span>
+        <h3>Süringstraße</h3>
+        <div class="location-address">
+          Süringstraße 4<br/>48653 Coesfeld
+        </div>
+        <div class="location-rows">
+          <div class="location-row">
+            <span class="label">Telefon</span>
+            <a href="tel:02541842800" class="value">02541 · 842800</a>
+          </div>
+          <div class="location-row">
+            <span class="label">Anfahrt</span>
+            <a href="https://maps.google.com/?q=Süringstraße+4+48653+Coesfeld" target="_blank" rel="noopener" class="value">Google Maps öffnen ↗</a>
+          </div>
+        </div>
+        <div class="location-hours">
+          <span><strong>Mo–Fr</strong> 8:30–18:00</span>
+          <span><strong>Sa</strong> 8:30–15:00</span>
+          <span><strong>So</strong> Geschlossen</span>
+        </div>
+      </div>
+
+      <div class="location">
+        <span class="location-num italic">— Filiale 02</span>
+        <h3>Kleine Viehstraße</h3>
+        <div class="location-address">
+          Kleine Viehstraße 13<br/>48653 Coesfeld
+        </div>
+        <div class="location-rows">
+          <div class="location-row">
+            <span class="label">Telefon</span>
+            <a href="tel:025419378790" class="value">02541 · 9378790</a>
+          </div>
+          <div class="location-row">
+            <span class="label">Anfahrt</span>
+            <a href="https://maps.google.com/?q=Kleine+Viehstraße+13+48653+Coesfeld" target="_blank" rel="noopener" class="value">Google Maps öffnen ↗</a>
+          </div>
+        </div>
+        <div class="location-hours">
+          <span><strong>Mo–Fr</strong> 8:30–18:00</span>
+          <span><strong>Sa</strong> 8:30–15:00</span>
+          <span><strong>So</strong> Geschlossen</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--line); text-align: center;" class="reveal">
+      <span class="eyebrow eyebrow-line" style="margin-bottom: 1.5rem; display: inline-block;">Direkter Kontakt</span>
+      <h2 style="font-family: var(--font-display); font-weight: 300; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2rem;">
+        Oder erreichen Sie uns via <span class="italic" style="color: var(--accent);">WhatsApp</span> oder <span class="italic" style="color: var(--accent);">E-Mail.</span>
+      </h2>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://wa.me/4917684503037" target="_blank" rel="noopener" class="btn btn-primary">WhatsApp · 0176 845 03037</a>
+        <a href="mailto:hairstylebyanwar@gmail.com" class="btn btn-ghost">hairstylebyanwar@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ════════════════ TERMIN ════════════════ -->
+<div class="page" data-route="/termin">
+
+<section class="page-header">
+  <div class="container">
+    <div class="page-header-inner">
+      <div>
+        <span class="eyebrow eyebrow-line" style="margin-bottom: 1.5rem; display: inline-block;">Terminanfrage</span>
+        <h1>Ihr Termin bei<br/><span class="italic">Anwar.</span></h1>
+      </div>
+      <p>
+        Füllen Sie das Formular aus — wir bestätigen Ihren Wunschtermin werktags innerhalb weniger Stunden per WhatsApp oder Telefon.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="booking">
+  <div class="container">
+    <div class="booking-grid">
+      <aside class="booking-sidebar">
+        <h3>So läuft's</h3>
+        <div class="booking-steps">
+          <div class="booking-step">
+            <span class="num italic">1.</span>
+            <span class="text"><strong>Formular ausfüllen.</strong> Salon, Leistung und Wunschtermin angeben.</span>
+          </div>
+          <div class="booking-step">
+            <span class="num italic">2.</span>
+            <span class="text"><strong>Absenden.</strong> Per WhatsApp (am schnellsten) oder E-Mail — Sie wählen den Kanal.</span>
+          </div>
+          <div class="booking-step">
+            <span class="num italic">3.</span>
+            <span class="text"><strong>Bestätigung.</strong> Wir prüfen den Termin und melden uns werktags zeitnah zurück.</span>
+          </div>
+        </div>
+        <div class="booking-contact-alt">
+          <div class="label">Lieber direkt anrufen?</div>
+          <a href="tel:02541842800"><strong>Süringstraße</strong> · 02541 842800</a>
+          <a href="tel:025419378790"><strong>Kleine Viehstraße</strong> · 02541 9378790</a>
+        </div>
+      </aside>
+
+      <form id="booking-form" class="booking-form" onsubmit="return false;">
+        <div class="form-group-row">
+          <div class="form-group">
+            <label class="form-label" for="f-name">Name <span class="required">*</span></label>
+            <input type="text" id="f-name" class="form-input" required placeholder="Ihr vollständiger Name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-phone">Telefon <span class="required">*</span></label>
+            <input type="tel" id="f-phone" class="form-input" required placeholder="z. B. 0176 8450 3037" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-email">E-Mail <span style="color: var(--ink-muted); font-weight: 400; text-transform: none; letter-spacing: 0;">· optional</span></label>
+          <input type="email" id="f-email" class="form-input" placeholder="ihre@email.de" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Gewünschter Salon <span class="required">*</span></label>
+          <div class="form-radio-group">
+            <label class="form-radio">
+              <input type="radio" name="salon" value="Süringstraße 4" required checked />
+              <span class="form-radio-label">
+                <strong>Süringstraße</strong>
+                <span>Süringstraße 4</span>
+              </span>
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="salon" value="Kleine Viehstraße 13" required />
+              <span class="form-radio-label">
+                <strong>Kleine Viehstraße</strong>
+                <span>Kleine Viehstraße 13</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-service">Leistung <span class="required">*</span></label>
+          <select id="f-service" class="form-select" required>
+            <option value="">— bitte wählen —</option>
+            <optgroup label="Damen">
+              <option>Damenhaarschnitt (ab 32,50 €)</option>
+              <option>Waschen und Föhnen (ab 22,50 €)</option>
+              <option>Waschen und Legen (ab 23,50 €)</option>
+              <option>Dauerwelle (ab 84,00 €)</option>
+              <option>Färben (ab 52,00 €)</option>
+              <option>Ansatzfärben / Tönen (ab 42,00 €)</option>
+              <option>Foliensträhnen (ab 64,00 €)</option>
+              <option>Ansatz-Foliensträhnen (ab 64,00 €)</option>
+              <option>Haubensträhnen (ab 52,00 €)</option>
+              <option>Oberkopf-Foliensträhnen (ab 46,00 €)</option>
+              <option>Brautfrisur (auf Anfrage)</option>
+              <option>Augenbrauen färben (10,00 €)</option>
+              <option>Wimpern färben (10,00 €)</option>
+              <option>Zupfen · Fadentechnik (10,00 €)</option>
+              <option>Mädchen 10–16 J. (ab 19,00 €)</option>
+            </optgroup>
+            <optgroup label="Herren">
+              <option>Herrenhaarschnitt (22,00 €)</option>
+              <option>Herren-Haarschnitt &amp; Rasur (33,00 €)</option>
+              <option>Muster (8,00 €)</option>
+              <option>Nassrasur (13,00 €)</option>
+              <option>Modellrasur (13,00 €)</option>
+              <option>Zupfen · Fadentechnik (10,00 €)</option>
+              <option>Maschinenhaarschnitt (16,00 €)</option>
+            </optgroup>
+            <optgroup label="Kinder">
+              <option>Kinderhaarschnitt bis 9 J. (12,00 €)</option>
+              <option>Jugendliche 10–12 J. (17,00 €)</option>
+              <option>Kinder „Null"-Schnitt (19,00 €)</option>
+            </optgroup>
+            <optgroup label="Beratung">
+              <option>Kostenlose Beratung / Noch unsicher</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label class="form-label" for="f-date">Wunschdatum <span class="required">*</span></label>
+            <input type="date" id="f-date" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-time">Wunschzeit <span class="required">*</span></label>
+            <select id="f-time" class="form-select" required>
+              <option value="">— bitte wählen —</option>
+              <option>08:30</option><option>09:00</option><option>09:30</option>
+              <option>10:00</option><option>10:30</option><option>11:00</option>
+              <option>11:30</option><option>12:00</option><option>12:30</option>
+              <option>13:00</option><option>13:30</option><option>14:00</option>
+              <option>14:30</option><option>15:00</option><option>15:30</option>
+              <option>16:00</option><option>16:30</option><option>17:00</option>
+              <option>17:30</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-notes">Anmerkungen <span style="color: var(--ink-muted); font-weight: 400; text-transform: none; letter-spacing: 0;">· optional</span></label>
+          <textarea id="f-notes" class="form-textarea" placeholder="Wunschstylist:in? Erstbesuch? Sonstiges?"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" onclick="submitBooking('whatsapp')">Per WhatsApp senden →</button>
+          <button type="button" class="btn btn-ghost" onclick="submitBooking('email')">Per E-Mail senden</button>
+        </div>
+
+        <p class="form-note">
+          Ihre Anfrage ist unverbindlich. Verbindlich wird der Termin erst nach unserer Bestätigung. Wir behandeln Ihre Daten vertraulich und nutzen sie ausschließlich zur Terminabwicklung.
+        </p>
+      </form>
+
+      <div id="booking-confirmation" class="booking-confirmation" style="grid-column: 1 / -1;">
+        <div class="check">✓</div>
+        <h3>Anfrage bereit zum Absenden</h3>
+        <p id="conf-text">Ihre Terminanfrage wurde in <strong>WhatsApp</strong> vorbereitet. Bitte senden Sie die Nachricht ab — wir melden uns werktags zeitnah mit der Bestätigung zurück.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="https://www.hairstyle-by-anwar.de/wp-content/uploads/2024/08/26476_Hairstyle_by_Anwar_Logo_V06.png" alt="Hairstyle by Anwar" />
+        <p class="footer-tagline">
+          Exklusiver Newsha Partnersalon und Meisterbetrieb mit zwei Standorten in Coesfeld — seit Jahren unter Anwars kreativer Führung.
+        </p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/hairstyle.by.anwar/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="18" cy="6" r="0.5" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/p/Hairstyle-by-Anwar-100077111619197/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Salon</h4>
+        <a href="#/leistungen" data-route="/leistungen">Leistungen</a>
+        <a href="#/arbeiten" data-route="/arbeiten">Arbeiten</a>
+        <a href="#/team" data-route="/team">Team</a>
+        <a href="#/shop" data-route="/shop">Newsha Shop</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="tel:02541842800">Süringstraße · 02541 842800</a>
+        <a href="tel:025419378790">Kleine Viehstr. · 02541 9378790</a>
+        <a href="https://wa.me/4917684503037" target="_blank" rel="noopener">WhatsApp · 0176 845 03037</a>
+        <a href="mailto:hairstylebyanwar@gmail.com">E-Mail</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Öffnungszeiten</h4>
+        <p>Mo–Fr · 8:30–18:00</p>
+        <p>Sa · 8:30–15:00</p>
+        <p>So · Geschlossen</p>
+        <a href="#/termin" data-route="/termin" style="margin-top: 1rem; color: var(--accent-light); border-bottom: 1px solid var(--accent); padding-bottom: 2px; display: inline-block;">Termin buchen →</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© Hairstyle by Anwar 2026 · Alle Rechte vorbehalten</div>
+      <div>
+        <a href="https://www.hairstyle-by-anwar.de/impressum/" target="_blank" rel="noopener">Impressum</a>
+        <a href="https://www.hairstyle-by-anwar.de/datenschutz/" target="_blank" rel="noopener">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<button class="chatbot-toggle" id="chatbot-toggle" aria-label="Chat öffnen">
+  <span class="chatbot-pulse"></span>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+</button>
+
+<div class="chatbot-panel" id="chatbot-panel">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar italic">A</div>
+    <div>
+      <div class="chatbot-title">Anwar — Assistent</div>
+      <div class="chatbot-subtitle">Antwortet sofort</div>
+    </div>
+  </div>
+  <div class="chatbot-messages" id="chatbot-messages"></div>
+  <div class="chat-suggestions" id="chat-suggestions"></div>
+  <form class="chatbot-input" id="chatbot-input-form" onsubmit="return false;">
+    <input type="text" id="chatbot-input" placeholder="Fragen Sie mich etwas…" autocomplete="off" />
+    <button type="submit" aria-label="Senden">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ════════════════ ROUTER ════════════════ */
+const routes = ['/', '/leistungen', '/arbeiten', '/team', '/shop', '/standorte', '/termin'];
+const pageTitles = {
+  '/': 'Hairstyle by Anwar — Meisterbetrieb · Coesfeld',
+  '/leistungen': 'Leistungen & Preise · Hairstyle by Anwar',
+  '/arbeiten': 'Arbeiten · Hairstyle by Anwar',
+  '/team': 'Team · Hairstyle by Anwar',
+  '/shop': 'Newsha Shop · Hairstyle by Anwar',
+  '/standorte': 'Standorte · Hairstyle by Anwar',
+  '/termin': 'Terminanfrage · Hairstyle by Anwar'
+};
+
+function getCurrentRoute() {
+  const hash = window.location.hash.replace('#', '') || '/';
+  return routes.includes(hash) ? hash : '/';
+}
+
+function navigateTo(route) {
+  window.location.hash = route;
+}
+
+function renderRoute() {
+  const route = getCurrentRoute();
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.querySelector(`[data-route="${route}"].page`);
+  if (target) {
+    target.classList.add('active');
+    target.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.remove('in'));
+    setTimeout(() => observeReveals(target), 50);
+  }
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('data-route') === route);
+  });
+  document.title = pageTitles[route] || pageTitles['/'];
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  updateNavState();
+  document.getElementById('nav-center').classList.remove('open');
+  document.getElementById('nav-mobile-toggle').classList.remove('open');
+  if (window.threeAnimation) {
+    window.threeAnimation.setActive(route === '/');
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('[data-route]');
+  if (link) {
+    e.preventDefault();
+    const route = link.getAttribute('data-route');
+    if (route !== getCurrentRoute()) {
+      navigateTo(route);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+});
+
+window.addEventListener('hashchange', renderRoute);
+
+/* ════════════════ NAV SCROLL ════════════════ */
+const nav = document.getElementById('nav');
+function updateNavState() {
+  const route = getCurrentRoute();
+  const isHome = route === '/';
+  const scrolled = window.scrollY > 60;
+  nav.classList.toggle('nav-solid', !isHome || scrolled);
+}
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  updateNavState();
+  const s = window.scrollY;
+  if (s > 100 && s > lastScroll + 5) {
+    nav.style.transform = 'translateY(-110%)';
+  } else if (s < lastScroll - 5 || s < 100) {
+    nav.style.transform = 'translateY(0)';
+  }
+  lastScroll = s;
+}, { passive: true });
+
+const mobileToggle = document.getElementById('nav-mobile-toggle');
+const navCenter = document.getElementById('nav-center');
+mobileToggle.addEventListener('click', () => {
+  mobileToggle.classList.toggle('open');
+  navCenter.classList.toggle('open');
+});
+
+/* ════════════════ 3D HERO ════════════════ */
+(function() {
+  const container = document.getElementById('three-canvas');
+  if (!container || typeof THREE === 'undefined') return;
+
+  const scene = new THREE.Scene();
+  const width = container.clientWidth;
+  const height = container.clientHeight || 600;
+  const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
+  camera.position.set(0, 0, 5.5);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  container.appendChild(renderer.domElement);
+
+  const envCanvas = document.createElement('canvas');
+  envCanvas.width = 512; envCanvas.height = 512;
+  const ctx = envCanvas.getContext('2d');
+  const grad = ctx.createLinearGradient(0, 0, 0, 512);
+  grad.addColorStop(0, '#3a2a18');
+  grad.addColorStop(0.3, '#a67c52');
+  grad.addColorStop(0.6, '#e8c99a');
+  grad.addColorStop(1, '#1a1410');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 5; i++) {
+    const x = Math.random() * 512, y = Math.random() * 512;
+    const r = 80 + Math.random() * 120;
+    const g2 = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g2.addColorStop(0, 'rgba(255,230,180,0.8)');
+    g2.addColorStop(1, 'rgba(255,230,180,0)');
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, 512, 512);
+  }
+  const envTexture = new THREE.CanvasTexture(envCanvas);
+  envTexture.mapping = THREE.EquirectangularReflectionMapping;
+
+  scene.add(new THREE.AmbientLight(0xffe6c0, 0.4));
+  const keyLight = new THREE.DirectionalLight(0xffd9a3, 1.2);
+  keyLight.position.set(3, 4, 3);
+  scene.add(keyLight);
+  const fillLight = new THREE.DirectionalLight(0x8a6940, 0.6);
+  fillLight.position.set(-4, -2, 2);
+  scene.add(fillLight);
+  const rimLight = new THREE.PointLight(0xffb874, 1.5, 10);
+  rimLight.position.set(-2, 3, -3);
+  scene.add(rimLight);
+
+  const geometry = new THREE.TorusKnotGeometry(1.05, 0.28, 240, 32, 2, 3);
+  const material = new THREE.MeshStandardMaterial({
+    color: 0xd4a872, metalness: 1, roughness: 0.15,
+    envMap: envTexture, envMapIntensity: 1.4
+  });
+  const torusKnot = new THREE.Mesh(geometry, material);
+  torusKnot.position.x = 1.3;
+  scene.add(torusKnot);
+
+  const particleCount = 80;
+  const particlesGeom = new THREE.BufferGeometry();
+  const pPositions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount; i++) {
+    pPositions[i*3] = (Math.random() - 0.5) * 10;
+    pPositions[i*3+1] = (Math.random() - 0.5) * 6;
+    pPositions[i*3+2] = (Math.random() - 0.5) * 4 - 1;
+  }
+  particlesGeom.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+  const particlesMat = new THREE.PointsMaterial({
+    color: 0xd4b891, size: 0.025,
+    transparent: true, opacity: 0.6, sizeAttenuation: true
+  });
+  const particles = new THREE.Points(particlesGeom, particlesMat);
+  scene.add(particles);
+
+  const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+  window.addEventListener('mousemove', (e) => {
+    mouse.tx = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.ty = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+
+  function adjustForViewport() {
+    if (window.innerWidth < 860) {
+      torusKnot.position.x = 0; torusKnot.position.y = -0.5;
+      camera.position.z = 6.5;
+      torusKnot.scale.setScalar(0.75);
+    } else {
+      torusKnot.position.x = 1.4; torusKnot.position.y = 0;
+      camera.position.z = 5.5;
+      torusKnot.scale.setScalar(1);
+    }
+  }
+
+  function resize() {
+    const w = container.clientWidth;
+    const h = container.clientHeight || 600;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+    adjustForViewport();
+  }
+  window.addEventListener('resize', resize);
+  adjustForViewport();
+
+  let elapsed = 0;
+  let active = true;
+  window.threeAnimation = { setActive: (a) => { active = a; } };
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!active) return;
+    elapsed += 0.008;
+    mouse.x += (mouse.tx - mouse.x) * 0.05;
+    mouse.y += (mouse.ty - mouse.y) * 0.05;
+    torusKnot.rotation.x = elapsed * 0.3 + mouse.y * 0.3;
+    torusKnot.rotation.y = elapsed * 0.42 + mouse.x * 0.4;
+    particles.rotation.y = elapsed * 0.05;
+    particles.rotation.x = mouse.y * 0.1;
+    camera.position.x = mouse.x * 0.2;
+    camera.position.y = mouse.y * 0.15;
+    camera.lookAt(torusKnot.position);
+    renderer.render(scene, camera);
+  }
+  animate();
+  requestAnimationFrame(() => { document.body.classList.add('hero-loaded'); });
+})();
+
+/* ════════════════ SCROLL REVEAL ════════════════ */
+let revealObserver;
+function observeReveals(root = document) {
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  }
+  root.querySelectorAll('.reveal:not(.in), .reveal-stagger:not(.in)').forEach(el => revealObserver.observe(el));
+}
+
+/* ════════════════ BOOKING FORM ════════════════ */
+(function() {
+  const dateInput = document.getElementById('f-date');
+  if (dateInput) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+  }
+})();
+
+function submitBooking(channel) {
+  const form = document.getElementById('booking-form');
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const salon = form.querySelector('input[name="salon"]:checked')?.value;
+  const service = document.getElementById('f-service').value;
+  const date = document.getElementById('f-date').value;
+  const time = document.getElementById('f-time').value;
+  const notes = document.getElementById('f-notes').value.trim();
+
+  if (!name || !phone || !salon || !service || !date || !time) {
+    alert('Bitte füllen Sie alle Pflichtfelder aus (mit * markiert).');
+    return;
+  }
+
+  const dateFormatted = new Date(date).toLocaleDateString('de-DE', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  const msgLines = [
+    'Hallo Hairstyle by Anwar,',
+    '',
+    'ich möchte gerne einen Termin anfragen:',
+    '',
+    '• Name: ' + name,
+    '• Telefon: ' + phone,
+    email ? '• E-Mail: ' + email : null,
+    '• Salon: ' + salon,
+    '• Leistung: ' + service,
+    '• Wunschtermin: ' + dateFormatted + ' um ' + time + ' Uhr',
+    notes ? '• Anmerkung: ' + notes : null,
+    '',
+    'Vielen Dank!'
+  ].filter(Boolean);
+
+  const message = msgLines.join('\n');
+  const confText = document.getElementById('conf-text');
+  const confirmation = document.getElementById('booking-confirmation');
+
+  if (channel === 'whatsapp') {
+    const waUrl = 'https://wa.me/4917684503037?text=' + encodeURIComponent(message);
+    window.open(waUrl, '_blank');
+    confText.innerHTML = 'Ihre Terminanfrage wurde in <strong>WhatsApp</strong> geöffnet. Bitte senden Sie die vorbereitete Nachricht ab — wir melden uns werktags zeitnah mit der Bestätigung zurück.';
+  } else {
+    const subject = 'Terminanfrage · ' + name + ' · ' + date;
+    const mailUrl = 'mailto:hairstylebyanwar@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(message);
+    window.location.href = mailUrl;
+    confText.innerHTML = 'Ihr <strong>E-Mail-Programm</strong> wurde mit der vorbereiteten Nachricht geöffnet. Bitte senden Sie die E-Mail ab — wir melden uns werktags zeitnah mit der Bestätigung zurück.';
+  }
+
+  form.style.display = 'none';
+  confirmation.classList.add('show');
+  confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* ════════════════ CHATBOT ════════════════ */
+const knowledgeBase = [
+  { id: 'greeting',
+    keywords: ['hallo','hi','hey','moin','servus','guten tag','guten morgen','guten abend','grüß','hola'],
+    answer: 'Hallo! 👋 Schön, dass Sie da sind.\n\nIch beantworte gerne Fragen zu unserem Salon — Öffnungszeiten, Preise, Leistungen, Standorte, Produkte oder Terminbuchung.\n\nWobei kann ich Ihnen helfen?',
+    suggestions: ['Öffnungszeiten?','Was kostet ein Haarschnitt?','Termin buchen']
+  },
+  { id: 'hours',
+    keywords: ['öffnung','offen','wann','geöffnet','zeit','uhrzeit','samstag','sonntag','montag','geschlossen','feierabend'],
+    answer: 'Unsere Öffnungszeiten — gelten für beide Salons:\n\n• Montag bis Freitag: 8:30 – 18:00 Uhr\n• Samstag: 8:30 – 15:00 Uhr\n• Sonntag: geschlossen',
+    suggestions: ['Wo seid ihr?','Termin buchen','Ohne Termin möglich?']
+  },
+  { id: 'locations',
+    keywords: ['wo','adresse','standort','filiale','süring','vieh','coesfeld','anfahrt','finden','salon'],
+    answer: 'Wir haben zwei Salons in Coesfeld:\n\n• Süringstraße 4\n  Tel. 02541 842800\n\n• Kleine Viehstraße 13\n  Tel. 02541 9378790\n\nBeide Standorte mit gleichen Öffnungszeiten und gleichem Anspruch.',
+    suggestions: ['Öffnungszeiten?','Termin buchen','Parken?']
+  },
+  { id: 'phone',
+    keywords: ['telefon','anrufen','anruf','telefonnummer','nummer'],
+    answer: 'So erreichen Sie uns:\n\n• Süringstraße: 02541 842800\n• Kleine Viehstraße: 02541 9378790\n• WhatsApp: 0176 84503037\n• E-Mail: hairstylebyanwar@gmail.com',
+    suggestions: ['Öffnungszeiten?','Termin buchen']
+  },
+  { id: 'prices_women',
+    keywords: ['damen','frau','frauen','damenhaarschnitt'],
+    answer: 'Damen-Preise (Kurz / Mittel / Lang):\n\n• Damenhaarschnitt: ab 32,50 / 34,50 / 39,50 €\n• Waschen und Föhnen: ab 22,50 / 23,50 / 25,50 €\n• Färben: ab 52,00 / 62,00 / 76,00 €\n• Foliensträhnen: ab 64,00 / 74,00 / 84,00 €\n• Dauerwelle: ab 84,00 / 94,00 / 104,00 €\n\nDie komplette Liste finden Sie unter „Leistungen".',
+    suggestions: ['Herren-Preise','Was kostet Balayage?','Termin buchen']
+  },
+  { id: 'prices_men',
+    keywords: ['herr','mann','männer','herrenhaarschnitt','rasur','bart'],
+    answer: 'Herren-Preise:\n\n• Herrenhaarschnitt: 22,00 €\n• Herren-Haarschnitt & Rasur: 33,00 €\n• Maschinenhaarschnitt: 16,00 €\n• Nassrasur: 13,00 €\n• Modellrasur: 13,00 €\n• Muster: 8,00 €\n• Zupfen · Fadentechnik: 10,00 €',
+    suggestions: ['Kinder-Preise','Damen-Preise','Termin buchen']
+  },
+  { id: 'prices_kids',
+    keywords: ['kind','kinder','jugend','mädchen','junge','kinderhaarschnitt'],
+    answer: 'Kinder-Preise:\n\n• Kinderhaarschnitt bis 9 Jahre: 12,00 €\n• Jugendliche 10–12 Jahre: 17,00 €\n• Mädchen 10–16 J.: ab 19,00 € (je nach Länge)\n• Kinder mit „Null"-Schnitt: 19,00 €',
+    suggestions: ['Damen-Preise','Herren-Preise','Termin buchen']
+  },
+  { id: 'prices_color',
+    keywords: ['färb','farb','coloration','ansatz','tönen','tönung'],
+    answer: 'Farb-Behandlungen (Damen, Kurz / Mittel / Lang):\n\n• Färben: ab 52,00 / 62,00 / 76,00 €\n• Ansatzfärben / Tönen: ab 42,00 €\n• Haubensträhnen: ab 52,00 €\n\nBei Kombination mit neuem Haarschnitt zzgl. 12,00 €. Genaue Einschätzung gerne vor Ort — die Beratung ist kostenlos.',
+    suggestions: ['Was kostet Balayage?','Termin buchen','Pflege-Produkte']
+  },
+  { id: 'prices_highlights',
+    keywords: ['strähn','balayage','babylights','folien','highlights','meche'],
+    answer: 'Strähnen-Techniken (Damen, Kurz / Mittel / Lang):\n\n• Foliensträhnen: ab 64,00 / 74,00 / 84,00 €\n• Ansatz-Foliensträhnen: ab 64,00 €\n• Haubensträhnen: ab 52,00 €\n• Oberkopf-Foliensträhnen: ab 46,00 / 51,00 / 56,00 €\n\nBalayage besprechen wir individuell — je nach Haarlänge und gewünschter Intensität.',
+    suggestions: ['Ist Beratung kostenlos?','Termin buchen','Farbe']
+  },
+  { id: 'prices_general',
+    keywords: ['preis','kosten','kostet','wieviel','wie viel','was kost','preisliste'],
+    answer: 'Kurzer Überblick:\n\n• Damenhaarschnitt: ab 32,50 €\n• Herrenhaarschnitt: 22,00 €\n• Kinderhaarschnitt: ab 12,00 €\n• Färben: ab 52,00 €\n• Strähnen: ab 46,00 €\n\nDie vollständige Preisliste finden Sie unter „Leistungen" im Menü.',
+    suggestions: ['Damen-Preise','Herren-Preise','Kinder-Preise']
+  },
+  { id: 'appointment',
+    keywords: ['termin','buchen','reservieren','vereinbaren','anfrage','booking'],
+    answer: 'So einfach ist die Terminanfrage:\n\n• Online über unser Formular unter „Termin"\n• Per WhatsApp: 0176 84503037\n• Telefonisch: 02541 842800 oder 02541 9378790\n\nMöchten Sie direkt zum Buchungsformular?',
+    suggestions: ['Zum Buchungsformular →','Öffnungszeiten?','Ist Beratung kostenlos?']
+  },
+  { id: 'walkin',
+    keywords: ['walk','ohne termin','spontan','laufkund','vorbei','reinkommen'],
+    answer: 'Wir nehmen gerne Laufkundschaft — ob spontan Zeit ist, hängt aber vom Tag ab. Um Wartezeiten zu vermeiden, empfehlen wir einen Termin vorab, z. B. per WhatsApp (0176 84503037) oder über unser Buchungsformular.',
+    suggestions: ['Termin buchen','Öffnungszeiten?']
+  },
+  { id: 'newsha',
+    keywords: ['newsha','produkt','pflege','shampoo','conditioner','shop','kaufen','mask','masque','treatment'],
+    answer: 'Wir sind exklusiver Newsha Partnersalon. 🏆\n\nUnsere Favoriten — u.a. Color Protect Shampoo, Deep Treatment Masque, Leave-In Conditioner — finden Sie unter „Shop". Die Bestellung läuft direkt über unsere Newsha-Partnerseite.\n\nAuch im Salon beraten wir Sie gerne zur richtigen Pflege.',
+    suggestions: ['Zum Shop →','Termin buchen','Ist Beratung kostenlos?']
+  },
+  { id: 'consultation',
+    keywords: ['beratung','unverbindlich','kostenlos','unsicher','welche farbe','was passt'],
+    answer: 'Jede Behandlung beginnt bei uns mit einer kostenlosen Beratung. Wir nehmen uns Zeit, um Ihr Haar, Ihre Wünsche und Ihren Alltag zu verstehen — erst danach beginnt die eigentliche Arbeit.\n\nAuch wenn Sie noch unsicher sind: Kommen Sie einfach auf einen Espresso vorbei.',
+    suggestions: ['Termin buchen','Öffnungszeiten?']
+  },
+  { id: 'bridal',
+    keywords: ['braut','hochzeit','heirat','brautfrisur','hochsteck','probetermin'],
+    answer: 'Brautfrisuren gehören zu unseren Spezialitäten:\n\n• Probetermin vor dem Hochzeitstag\n• Moderne Hochsteckfrisuren & Brautlooks\n• Abstimmung auf Kleid, Schmuck und Tagesablauf\n\nPreis individuell — bitte vereinbaren Sie ein Beratungsgespräch.',
+    suggestions: ['Termin buchen','Team ansehen']
+  },
+  { id: 'team',
+    keywords: ['team','mitarbeiter','stylist','friseurin','friseur','wer schneidet','anwar','nicole','viktoria','kateryna'],
+    answer: 'Unser Team:\n\n• Anwar — Inhaber & Meister, kreativer Kopf beider Salons\n• Nicole — Senior Stylistin (33 Jahre Erfahrung)\n• Viktoria — Senior Stylistin (24 Jahre Erfahrung)\n• Kateryna — Stylistin\n\nBei der Terminbuchung können Sie gerne eine Wunschperson angeben.',
+    suggestions: ['Termin buchen','Team ansehen','Ist Beratung kostenlos?']
+  },
+  { id: 'parking',
+    keywords: ['park','parken','parkplatz','auto','abstell'],
+    answer: 'In der Coesfelder Innenstadt gibt es mehrere öffentliche Parkplätze und Parkhäuser in fußläufiger Entfernung zu beiden Salons. Konkrete Empfehlungen geben wir gerne telefonisch.',
+    suggestions: ['Standorte','Telefon','Termin buchen']
+  },
+  { id: 'meisterbetrieb',
+    keywords: ['meister','meisterbetrieb','qualität','zertifik','ausbildung'],
+    answer: 'Ja — wir sind Meisterbetrieb. Das bedeutet:\n\n• Geprüfte Qualitäts­standards im Handwerk\n• Laufende Weiterbildungen des gesamten Teams\n• Verpflichtung zu ehrlicher, transparenter Arbeit\n\nZusätzlich sind wir exklusiver Newsha Partnersalon in der Region.',
+    suggestions: ['Team ansehen','Termin buchen']
+  },
+  { id: 'thanks',
+    keywords: ['danke','vielen dank','dankeschön','thx','thanks','merci'],
+    answer: 'Gerne! 🙏 Falls Sie noch Fragen haben, bin ich da. Sonst freuen wir uns auf Ihren Besuch!',
+    suggestions: ['Termin buchen','Öffnungszeiten?','Standorte']
+  },
+  { id: 'bye',
+    keywords: ['tschüss','ciao','bye','auf wiedersehen','bis dann','bis bald'],
+    answer: 'Bis bald — wir freuen uns auf Sie! ✨',
+    suggestions: ['Termin buchen']
+  }
+];
+
+const defaultSuggestions = ['Öffnungszeiten?','Was kostet ein Haarschnitt?','Wo seid ihr?','Termin buchen'];
+const fallbackAnswer = 'Das habe ich nicht ganz verstanden — aber ich helfe gerne weiter. Sie erreichen uns direkt:\n\n• Tel. Süringstraße: 02541 842800\n• Tel. Kleine Viehstraße: 02541 9378790\n• WhatsApp: 0176 84503037\n• E-Mail: hairstylebyanwar@gmail.com\n\nOder versuchen Sie eine der Vorschläge unten:';
+
+function findBestMatch(input) {
+  const lower = input.toLowerCase();
+  let best = null, bestScore = 0;
+  for (const entry of knowledgeBase) {
+    const score = entry.keywords.reduce((sum, kw) => sum + (lower.includes(kw) ? kw.length : 0), 0);
+    if (score > bestScore) { bestScore = score; best = entry; }
+  }
+  return bestScore > 0 ? best : null;
+}
+
+const chatToggle = document.getElementById('chatbot-toggle');
+const chatPanel = document.getElementById('chatbot-panel');
+const chatMessages = document.getElementById('chatbot-messages');
+const chatInput = document.getElementById('chatbot-input');
+const chatForm = document.getElementById('chatbot-input-form');
+const chatSuggestions = document.getElementById('chat-suggestions');
+
+let chatOpened = false;
+
+chatToggle.addEventListener('click', () => {
+  const isOpen = chatPanel.classList.toggle('open');
+  chatToggle.classList.toggle('open', isOpen);
+  if (isOpen && !chatOpened) {
+    chatOpened = true;
+    setTimeout(() => {
+      addBotMessage('Hallo! 👋 Ich bin Anwars digitaler Assistent und helfe Ihnen bei Fragen rund um unseren Salon in Coesfeld.\n\nWas möchten Sie wissen?', defaultSuggestions);
+    }, 300);
+  }
+});
+
+function escapeHtml(str) {
+  return str.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+}
+function linkify(text) {
+  return escapeHtml(text)
+    .replace(/(0\d{3,4}\s?\d{4,})/g, '<a href="tel:$1">$1</a>')
+    .replace(/\n/g, '<br>');
+}
+
+function addMessage(text, type) {
+  const msg = document.createElement('div');
+  msg.className = 'chat-message ' + type;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  bubble.innerHTML = linkify(text);
+  msg.appendChild(bubble);
+  chatMessages.appendChild(msg);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function addTyping() {
+  const typing = document.createElement('div');
+  typing.className = 'chat-message bot';
+  typing.id = 'typing-indicator';
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-typing';
+  bubble.innerHTML = '<span></span><span></span><span></span>';
+  typing.appendChild(bubble);
+  chatMessages.appendChild(typing);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+function setSuggestions(suggestions) {
+  chatSuggestions.innerHTML = '';
+  if (!suggestions || suggestions.length === 0) {
+    chatSuggestions.style.display = 'none';
+    return;
+  }
+  chatSuggestions.style.display = 'flex';
+  suggestions.forEach(sug => {
+    const chip = document.createElement('button');
+    chip.className = 'chat-chip';
+    chip.type = 'button';
+    chip.textContent = sug;
+    chip.addEventListener('click', () => {
+      if (sug.includes('Buchungsformular') || sug === 'Termin buchen') {
+        navigateTo('/termin');
+        chatPanel.classList.remove('open');
+        chatToggle.classList.remove('open');
+        return;
+      }
+      if (sug.includes('Shop')) {
+        navigateTo('/shop');
+        chatPanel.classList.remove('open');
+        chatToggle.classList.remove('open');
+        return;
+      }
+      if (sug === 'Team ansehen') {
+        navigateTo('/team');
+        chatPanel.classList.remove('open');
+        chatToggle.classList.remove('open');
+        return;
+      }
+      if (sug === 'Standorte') {
+        navigateTo('/standorte');
+        chatPanel.classList.remove('open');
+        chatToggle.classList.remove('open');
+        return;
+      }
+      handleUserInput(sug);
+    });
+    chatSuggestions.appendChild(chip);
+  });
+}
+
+function addBotMessage(text, suggestions) {
+  addTyping();
+  setSuggestions([]);
+  const delay = Math.min(400 + text.length * 8, 1500);
+  setTimeout(() => {
+    removeTyping();
+    addMessage(text, 'bot');
+    setSuggestions(suggestions || defaultSuggestions);
+  }, delay);
+}
+
+function handleUserInput(input) {
+  const trimmed = input.trim();
+  if (!trimmed) return;
+  addMessage(trimmed, 'user');
+  chatInput.value = '';
+  const match = findBestMatch(trimmed);
+  if (match) {
+    addBotMessage(match.answer, match.suggestions);
+  } else {
+    addBotMessage(fallbackAnswer, defaultSuggestions);
+  }
+}
+
+chatForm.addEventListener('submit', () => handleUserInput(chatInput.value));
+chatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleUserInput(chatInput.value);
+  }
+});
+
+/* ════════════════ INIT ════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  renderRoute();
+  observeReveals();
+});
+renderRoute();
+observeReveals();
+</script>
+
+</body>
+</html>
