@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anfrage starten — informakit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#7b6ef5;
+  --pink:#e879a0;
+  --grad:linear-gradient(135deg,#7b6ef5,#e879a0);
+  --dark:#07070f;
+  --dark2:#0e0e1a;
+  --light:#f4f4f8;
+  --paper:#fafafa;
+  --ink:#0a0a12;
+  --ink2:#3a3a4a;
+  --muted:#8888a0;
+  --line:rgba(10,10,18,0.1);
+  --line-d:rgba(255,255,255,0.08);
+  --sans:'Inter',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+
+/* GRAIN */
+#grain{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 2.5rem;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  background:rgba(250,250,250,0.9);
+  border-bottom:1px solid var(--line);
+}
+.nav-logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none}
+.nav-dot{width:18px;height:18px;border-radius:50%;background:var(--grad);flex-shrink:0}
+.nav-name{font-size:1.05rem;font-weight:800;letter-spacing:-0.045em;color:var(--ink)}
+.nav-back{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.04em;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s}
+.nav-back:hover{color:var(--purple)}
+.nav-back::before{content:'←'}
+
+/* MAIN LAYOUT */
+main{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:64px}
+
+/* LEFT — brand side */
+.anf-left{
+  background:var(--dark);
+  padding:5rem 4rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:sticky;top:64px;height:calc(100vh - 64px);
+  overflow:hidden;
+}
+.anf-left-inner{position:relative;z-index:2}
+.anf-tag{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:2.5rem;display:flex;align-items:center;gap:0.7rem}
+.anf-tag::before{content:'';width:16px;height:1px;background:var(--purple)}
+.anf-left h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;letter-spacing:-0.055em;line-height:0.95;color:#fff;margin-bottom:1.5rem}
+.anf-left h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.anf-left p{font-size:1rem;line-height:1.75;color:rgba(255,255,255,0.45);max-width:380px}
+.anf-left p strong{color:rgba(255,255,255,0.8);font-weight:600}
+
+/* Info items */
+.anf-info{display:flex;flex-direction:column;gap:0;margin-top:4rem}
+.anf-info-item{border-top:1px solid rgba(255,255,255,0.07);padding:1.2rem 0}
+.anf-info-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:0.35rem}
+.anf-info-val{font-size:0.9rem;color:rgba(255,255,255,0.7);font-weight:500}
+.anf-info-val a{color:inherit;text-decoration:none;transition:color 0.2s}
+.anf-info-val a:hover{color:#fff}
+
+/* Status badge */
+.anf-status{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;color:rgba(255,255,255,0.35);border:1px solid rgba(255,255,255,0.1);padding:0.4rem 0.9rem;border-radius:100px}
+.anf-status-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* 3D Orb decoration */
+.anf-orb-wrap{position:absolute;bottom:-60px;right:-60px;pointer-events:none}
+canvas#anfCanvas{width:320px!important;height:320px!important;opacity:0.8}
+
+/* RIGHT — form side */
+.anf-right{
+  padding:5rem 4rem;
+  display:flex;flex-direction:column;
+  background:var(--paper);
+  overflow-y:auto;
+}
+
+/* Step progress */
+.step-progress{display:flex;align-items:center;gap:0;margin-bottom:4rem}
+.step-item{display:flex;align-items:center;gap:0}
+.step-num{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:0.65rem;font-weight:500;letter-spacing:0.05em;
+  border:1px solid var(--line);color:var(--muted);
+  transition:background 0.35s,border-color 0.35s,color 0.35s;
+  flex-shrink:0;
+}
+.step-num.active{background:var(--dark);border-color:var(--dark);color:#fff}
+.step-num.done{background:var(--grad);border-color:transparent;color:#fff}
+.step-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;color:var(--muted);margin-left:0.6rem;white-space:nowrap;transition:color 0.3s}
+.step-label.active{color:var(--ink)}
+.step-connector{width:3rem;height:1px;background:var(--line);margin:0 0.5rem;flex-shrink:0}
+
+/* Steps */
+.step{display:none;flex-direction:column;gap:0;animation:stepIn 0.4s cubic-bezier(0.16,1,0.3,1)}
+.step.active{display:flex}
+@keyframes stepIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+
+.step-hdr{margin-bottom:2.5rem}
+.step-n{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--purple);margin-bottom:0.5rem}
+.step-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-0.05em;line-height:1;color:var(--ink)}
+.step-title em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.step-sub{font-size:0.88rem;color:var(--muted);margin-top:0.5rem;line-height:1.6}
+
+/* Fields */
+.field{margin-bottom:2rem}
+.field label{display:block;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;transition:color 0.2s}
+.field:focus-within label{color:var(--purple)}
+.field input,.field select,.field textarea{
+  width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--line);
+  padding:0.8rem 0;font-size:1rem;font-family:var(--sans);font-weight:500;color:var(--ink);
+  outline:none;transition:border-color 0.25s;appearance:none;border-radius:0;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-bottom-color:var(--purple)}
+.field textarea{resize:none;min-height:110px;line-height:1.7}
+.field select option{background:var(--paper);font-size:0.9rem}
+.field-err{font-family:var(--mono);font-size:0.58rem;color:var(--pink);margin-top:0.4rem;display:none}
+.field.err input,.field.err select,.field.err textarea{border-bottom-color:var(--pink)}
+.field.err .field-err{display:block}
+
+/* Service picker */
+.srv-pick{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2rem}
+.sp-card{
+  border:1.5px solid var(--line);padding:1.1rem 1.3rem;
+  cursor:pointer;transition:border-color 0.2s,background 0.2s;
+  border-radius:12px;user-select:none;
+}
+.sp-card:hover{border-color:rgba(123,110,245,0.3);background:rgba(123,110,245,0.04)}
+.sp-card.sel{border-color:var(--purple);background:rgba(123,110,245,0.06)}
+.sp-num{font-family:var(--mono);font-size:0.55rem;color:var(--purple);letter-spacing:0.08em;margin-bottom:0.35rem}
+.sp-name{font-size:0.88rem;font-weight:700;letter-spacing:-0.015em;color:var(--ink)}
+.sp-sub{font-family:var(--mono);font-size:0.58rem;color:var(--muted);margin-top:0.2rem}
+
+/* Budget */
+.budget-val{font-size:2.5rem;font-weight:900;letter-spacing:-0.05em;color:var(--ink);margin-bottom:0.3rem}
+.budget-val em{font-size:1rem;font-style:normal;font-weight:500;color:var(--muted)}
+input[type="range"]{
+  width:100%;height:3px;appearance:none;border-radius:2px;outline:none;cursor:pointer;
+  background:linear-gradient(to right,var(--purple),var(--pink));
+  margin:1rem 0 0.3rem;
+}
+input[type="range"]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:var(--dark);cursor:pointer;border:2px solid #fff;box-shadow:0 2px 8px rgba(123,110,245,0.4)}
+.budget-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:0.58rem;color:var(--muted)}
+
+/* AI box */
+.ai-btn{
+  display:flex;align-items:center;gap:0.7rem;
+  background:var(--dark);color:#fff;border:none;
+  font-family:var(--sans);font-size:0.85rem;font-weight:700;
+  padding:0.9rem 1.5rem;border-radius:100px;cursor:pointer;
+  transition:opacity 0.2s,transform 0.2s;margin-top:1rem;align-self:flex-start;
+}
+.ai-btn:hover{opacity:0.85;transform:translateY(-2px)}
+.ai-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--grad)}
+.ai-box{
+  background:var(--dark);border-radius:12px;padding:1.5rem;margin-top:1.2rem;
+  display:none;
+}
+.ai-box.vis{display:block;animation:stepIn 0.4s ease}
+.ai-box-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;color:var(--purple);margin-bottom:0.8rem}
+.ai-box-txt{font-size:0.9rem;line-height:1.8;color:rgba(255,255,255,0.7)}
+.ai-box-txt.typing::after{content:'▋';animation:blinkCur 1s infinite}
+@keyframes blinkCur{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Buttons */
+.btn-row{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap}
+.btn-p{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--grad);color:#fff;border:none;
+  font-family:var(--sans);font-size:0.9rem;font-weight:700;
+  padding:0.95rem 2rem;border-radius:100px;cursor:pointer;
+  box-shadow:0 6px 24px rgba(123,110,245,0.3);
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(123,110,245,0.45)}
+.btn-s{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:transparent;color:var(--ink2);border:1.5px solid var(--line);
+  font-family:var(--sans);font-size:0.88rem;font-weight:600;
+  padding:0.9rem 1.6rem;border-radius:100px;cursor:pointer;
+  transition:border-color 0.2s,color 0.2s;
+}
+.btn-s:hover{border-color:var(--ink);color:var(--ink)}
+
+/* Success */
+.success{
+  display:none;flex-direction:column;align-items:flex-start;gap:2rem;
+  padding:4rem 0;
+}
+.success.vis{display:flex;animation:stepIn 0.5s ease}
+.succ-orb{
+  width:64px;height:64px;border-radius:50%;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;
+  box-shadow:0 8px 32px rgba(123,110,245,0.4);
+}
+.succ-title{font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:-0.05em;line-height:1;color:var(--ink)}
+.succ-title em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.succ-note{font-size:1rem;color:var(--ink2);line-height:1.75;max-width:420px}
+.succ-note strong{color:var(--ink);font-weight:700}
+.succ-back{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:700;color:var(--purple);text-decoration:none;margin-top:0.5rem;transition:gap 0.2s}
+.succ-back:hover{gap:0.8rem}
+
+/* FOOTER */
+.anf-footer{padding:2rem 2.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.anf-footer a{font-family:var(--mono);font-size:0.58rem;color:var(--muted);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
+.anf-footer a:hover{color:var(--ink)}
+.anf-footer-copy{font-family:var(--mono);font-size:0.58rem;color:var(--muted)}
+
+@media(max-width:900px){
+  main{grid-template-columns:1fr}
+  .anf-left{position:relative;top:0;height:auto;padding:4rem 1.8rem;min-height:auto}
+  .anf-orb-wrap{display:none}
+  .anf-right{padding:3rem 1.8rem}
+  .step-connector{width:1.5rem}
+  .step-label{display:none}
+  nav{padding:1rem 1.5rem}
+}
+@keyframes fUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="grain"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="informakit.html" class="nav-logo">
+    <div class="nav-dot"></div>
+    <span class="nav-name">informakit</span>
+  </a>
+  <a href="informakit.html" class="nav-back">zurück zur Website</a>
+</nav>
+
+<main>
+  <!-- LEFT -->
+  <div class="anf-left">
+    <div class="anf-left-inner">
+      <div class="anf-tag">anfrage starten</div>
+      <h1>lass uns <em>reden.</em></h1>
+      <p>Ein Gespräch kostet nichts, verpflichtet zu nichts. Aber es könnte der Moment sein, in dem sich <strong>etwas verändert.</strong></p>
+
+      <div class="anf-info">
+        <div class="anf-info-item">
+          <div class="anf-info-label">e-mail</div>
+          <div class="anf-info-val"><a href="/cdn-cgi/l/email-protection#3058555c5c5f70595e565f425d515b59441e5455"><span class="__cf_email__" data-cfemail="a7cfc2cbcbc8e7cec9c1c8d5cac6ccced389c3c2">[email&#160;protected]</span></a></div>
+        </div>
+        <div class="anf-info-item">
+          <div class="anf-info-label">instagram</div>
+          <div class="anf-info-val"><a href="https://instagram.com/informakit" target="_blank" rel="noopener">@informakit</a></div>
+        </div>
+        <div class="anf-info-item">
+          <div class="anf-info-label">standort</div>
+          <div class="anf-info-val">Coesfeld, DE · remote-first</div>
+        </div>
+        <div class="anf-info-item">
+          <div class="anf-info-label">antwortzeit</div>
+          <div class="anf-info-val">innerhalb 24h · werktags</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem">
+        <div class="anf-status">
+          <div class="anf-status-dot"></div>
+          jetzt anfragen möglich
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini 3D orb decoration -->
+    <div class="anf-orb-wrap">
+      <canvas id="anfCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="anf-right">
+
+    <!-- Step progress -->
+    <div class="step-progress" id="stepProg">
+      <div class="step-item">
+        <div class="step-num active" id="sn0">01</div>
+        <span class="step-label active" id="sl0">kontakt</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item">
+        <div class="step-num" id="sn1">02</div>
+        <span class="step-label" id="sl1">projekt</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item">
+        <div class="step-num" id="sn2">03</div>
+        <span class="step-label" id="sl2">details</span>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success" id="success">
+      <div class="succ-orb">✓</div>
+      <div class="succ-title">anfrage <em>erhalten.</em></div>
+      <p class="succ-note">Wir haben deine Anfrage bekommen und melden uns innerhalb von <strong>24 Stunden</strong> bei dir — versprochen.</p>
+      <a href="informakit.html" class="succ-back">← zurück zur Website</a>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step active" id="step0">
+      <div class="step-hdr">
+        <div class="step-n">01 / 03</div>
+        <div class="step-title">wer bist <em>du?</em></div>
+        <div class="step-sub">Damit wir wissen, wen wir kontaktieren dürfen.</div>
+      </div>
+
+      <div class="field" id="f-name">
+        <label>dein name</label>
+        <input type="text" id="inp-name" placeholder="Max Mustermann" autocomplete="name">
+        <div class="field-err">bitte gib deinen Namen ein.</div>
+      </div>
+      <div class="field" id="f-email">
+        <label>e-mail-adresse</label>
+        <input type="email" id="inp-email" placeholder="max@firma.de" autocomplete="email">
+        <div class="field-err">bitte gib eine gültige E-Mail-Adresse ein.</div>
+      </div>
+      <div class="field">
+        <label>unternehmen <span style="opacity:0.5;font-size:0.85em">(optional)</span></label>
+        <input type="text" id="inp-company" placeholder="Muster GmbH" autocomplete="organization">
+      </div>
+      <div class="field">
+        <label>telefon <span style="opacity:0.5;font-size:0.85em">(optional)</span></label>
+        <input type="tel" id="inp-phone" placeholder="+49 123 456789" autocomplete="tel">
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-p" onclick="goStep(1)">weiter →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step1">
+      <div class="step-hdr">
+        <div class="step-n">02 / 03</div>
+        <div class="step-title">dein <em>projekt.</em></div>
+        <div class="step-sub">Wähle alles aus, was zutrifft. Mehrfachauswahl möglich.</div>
+      </div>
+
+      <div class="srv-pick" id="srvPick">
+        <div class="sp-card" data-v="website" onclick="toggleSrv(this)">
+          <div class="sp-num">01 ·</div>
+          <div class="sp-name">Website / Landing Page</div>
+          <div class="sp-sub">onepager bis corporate</div>
+        </div>
+        <div class="sp-card" data-v="webapp" onclick="toggleSrv(this)">
+          <div class="sp-num">02 ·</div>
+          <div class="sp-name">Web-App / SaaS</div>
+          <div class="sp-sub">dashboard, plattform, tool</div>
+        </div>
+        <div class="sp-card" data-v="automation" onclick="toggleSrv(this)">
+          <div class="sp-num">03 ·</div>
+          <div class="sp-name">KI &amp; Automatisierung</div>
+          <div class="sp-sub">zapier, n8n, gpt-agents</div>
+        </div>
+        <div class="sp-card" data-v="branding" onclick="toggleSrv(this)">
+          <div class="sp-num">04 ·</div>
+          <div class="sp-name">Branding &amp; Design</div>
+          <div class="sp-sub">logo, farbe, system</div>
+        </div>
+        <div class="sp-card" data-v="seo" onclick="toggleSrv(this)">
+          <div class="sp-num">05 ·</div>
+          <div class="sp-name">SEO &amp; Performance</div>
+          <div class="sp-sub">rankings, core web vitals</div>
+        </div>
+        <div class="sp-card" data-v="app" onclick="toggleSrv(this)">
+          <div class="sp-num">06 ·</div>
+          <div class="sp-name">Mobile App</div>
+          <div class="sp-sub">ios, android, pwa</div>
+        </div>
+      </div>
+
+      <div class="field" id="f-msg">
+        <label>beschreib dein projekt</label>
+        <textarea id="inp-msg" placeholder="Was möchtest du bauen? Was ist das Ziel? Was hast du bisher? Je konkreter, desto besser."></textarea>
+        <div class="field-err">erzähl uns bitte kurz von deinem Projekt.</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-p" onclick="goStep(2)">weiter →</button>
+        <button class="btn-s" onclick="goStep(0)">← zurück</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step2">
+      <div class="step-hdr">
+        <div class="step-n">03 / 03</div>
+        <div class="step-title">budget &amp; <em>timing.</em></div>
+        <div class="step-sub">Kein Stress — alles offen und ohne Verpflichtung.</div>
+      </div>
+
+      <div class="field" style="margin-bottom:2.5rem">
+        <label>budget-vorstellung</label>
+        <div class="budget-val" id="budgetDisp">€ 2.500 <em>budget</em></div>
+        <input type="range" id="budgetRange" min="500" max="25000" step="250" value="2500" oninput="updBudget(this.value)">
+        <div class="budget-labels"><span>€ 500</span><span>€ 25.000+</span></div>
+      </div>
+
+      <div class="field">
+        <label>zeitrahmen</label>
+        <select id="inp-timeline">
+          <option value="">— bitte wählen —</option>
+          <option value="asap">so schnell wie möglich</option>
+          <option value="1m">innerhalb eines Monats</option>
+          <option value="3m">in 2–3 Monaten</option>
+          <option value="6m">in 4–6 Monaten</option>
+          <option value="flex">flexibel</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>wie hast du von uns erfahren? <span style="opacity:0.5;font-size:0.85em">(optional)</span></label>
+        <select id="inp-source">
+          <option value="">— bitte wählen —</option>
+          <option value="instagram">Instagram</option>
+          <option value="empfehlung">Empfehlung</option>
+          <option value="google">Google</option>
+          <option value="andere">Andere</option>
+        </select>
+      </div>
+
+      <!-- AI Analysis -->
+      <button class="ai-btn" id="aiBtn" onclick="analyzeAI()">
+        <div class="ai-dot"></div>
+        anfrage analysieren lassen
+      </button>
+      <div class="ai-box" id="aiBox">
+        <div class="ai-box-tag">informakit · KI-Einschätzung</div>
+        <div class="ai-box-txt" id="aiTxt"></div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-p" onclick="submitForm()">anfrage absenden →</button>
+        <button class="btn-s" onclick="goStep(1)">← zurück</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="anf-footer">
+      <div style="display:flex;gap:1.5rem">
+        <a href="#">impressum</a>
+        <a href="#">datenschutz</a>
+      </div>
+      <div class="anf-footer-copy">© informakit · 2026</div>
+    </div>
+
+  </div><!-- /anf-right -->
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ════ MINI 3D ORB (left panel decoration) ════ */
+(function(){
+  const canvas = document.getElementById('anfCanvas');
+  if(!canvas) return;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(320, 320);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.z = 8;
+
+  const vS=`uniform float uTime;varying vec3 vP;varying vec3 vN;void main(){vP=position;vN=normalize(normal);vec3 p=position;float w=sin(p.x*2.5+uTime*0.9)*0.2+cos(p.y*2.0+uTime*0.65)*0.18;p+=normalize(normal)*w;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.0);}`;
+  const fS=`uniform float uTime;varying vec3 vP;varying vec3 vN;void main(){vec3 pur=vec3(0.482,0.431,0.961);vec3 pnk=vec3(0.910,0.475,0.627);float t=clamp(vP.y/3.0+0.5,0.0,1.0);vec3 col=mix(pnk,pur,t);float fr=pow(1.0-abs(dot(normalize(vN),vec3(0,0,1))),2.5);col+=vec3(0.3,0.2,0.9)*fr*0.5;gl_FragColor=vec4(col,0.9);}`;
+
+  const mat = new THREE.ShaderMaterial({vertexShader:vS,fragmentShader:fS,uniforms:{uTime:{value:0}},transparent:true});
+  const mesh = new THREE.Mesh(new THREE.IcosahedronGeometry(2.8,5), mat);
+  scene.add(mesh);
+
+  let t=0;
+  (function a(){requestAnimationFrame(a);t+=0.013;mat.uniforms.uTime.value=t;mesh.rotation.y=t*0.1;mesh.rotation.x=t*0.05;renderer.render(scene,camera);})();
+})();
+
+/* ════ FORM WIZARD ════ */
+let curStep = 0;
+const selSrv = new Set();
+
+function goStep(n){
+  // Validate on advance
+  if(n > curStep){
+    if(curStep===0){
+      const name = document.getElementById('inp-name').value.trim();
+      const email = document.getElementById('inp-email').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      document.getElementById('f-name').classList.toggle('err', !name);
+      document.getElementById('f-email').classList.toggle('err', !emailOk);
+      if(!name||!emailOk) return;
+    }
+    if(curStep===1){
+      const msg = document.getElementById('inp-msg').value.trim();
+      document.getElementById('f-msg').classList.toggle('err', !msg);
+      if(!msg) return;
+    }
+  }
+  document.getElementById('step'+curStep).classList.remove('active');
+  curStep = n;
+  document.getElementById('step'+n).classList.add('active');
+  updateProgress();
+  document.querySelector('.anf-right').scrollTop = 0;
+}
+
+function updateProgress(){
+  for(let i=0;i<3;i++){
+    const num = document.getElementById('sn'+i);
+    const lbl = document.getElementById('sl'+i);
+    num.classList.remove('active','done');
+    lbl.classList.remove('active');
+    if(i < curStep){ num.classList.add('done'); num.textContent='✓'; }
+    else { num.textContent = '0'+(i+1); }
+    if(i===curStep){ num.classList.add('active'); lbl.classList.add('active'); }
+  }
+}
+
+function toggleSrv(el){
+  el.classList.toggle('sel');
+  const v = el.dataset.v;
+  el.classList.contains('sel') ? selSrv.add(v) : selSrv.delete(v);
+}
+
+function updBudget(val){
+  const n = parseInt(val);
+  const f = n >= 25000 ? '25.000+' : n.toLocaleString('de-DE');
+  document.getElementById('budgetDisp').innerHTML = '€ ' + f + ' <em>budget</em>';
+}
+
+/* ════ AI ANALYSIS ════ */
+async function analyzeAI(){
+  const btn = document.getElementById('aiBtn');
+  const box = document.getElementById('aiBox');
+  const txt = document.getElementById('aiTxt');
+  const srv = Array.from(selSrv).join(', ') || 'nicht angegeben';
+  const msg = document.getElementById('inp-msg').value.trim();
+  const budget = document.getElementById('budgetDisp').textContent;
+
+  btn.disabled = true;
+  btn.innerHTML = '<div class="ai-dot"></div> analysiere...';
+  box.classList.add('vis');
+  txt.textContent = '';
+  txt.classList.add('typing');
+
+  try {
+    const result = await window.claude.complete(
+      `Du bist Berater für informakit, ein digitales Studio das Websites, Web-Apps, KI-Automatisierungen und Branding baut.
+
+Kundenanfrage:
+- Leistungen: ${srv}
+- Projekt: ${msg}
+- Budget: ${budget}
+
+Gib 3–4 Sätze ehrliche, konkrete Einschätzung auf Deutsch. Nenne einen klaren nächsten Schritt. Sei direkt und kompetent.`
+    );
+    txt.classList.remove('typing');
+    txt.textContent = result;
+  } catch(e) {
+    txt.classList.remove('typing');
+    txt.textContent = 'Dein Projekt klingt vielversprechend. Wir melden uns innerhalb von 24 Stunden mit einer persönlichen Einschätzung bei dir.';
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<div class="ai-dot"></div> erneut analysieren';
+}
+
+/* ════ SUBMIT ════ */
+function submitForm(){
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('stepProg').style.display = 'none';
+  document.getElementById('success').classList.add('vis');
+}
+</script>
+</body>
+</html>
